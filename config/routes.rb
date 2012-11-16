@@ -1,7 +1,6 @@
 Cmis::Application.routes.draw do
-  get "pages/about"
-
-  get "pages/contacts"
+  match '/contacts', :to => 'pages#contacts'
+  match '/about',    :to => 'pages#about'
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
