@@ -1,4 +1,8 @@
 Cmis::Application.routes.draw do
+  get "pages/about"
+
+  get "pages/contacts"
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

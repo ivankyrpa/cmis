@@ -6,9 +6,8 @@
 development:
   adapter: postgresql
   encoding: utf8
-  database: db/development
-  username: ivan
-  password: 22
+  database: cmis_development
+  pool: 5
   
 # Warning: The database defined as "test" will be erased and
 # re-generated from your development database when you run "rake".
@@ -16,13 +15,11 @@ development:
 test:
   adapter: postgresql
   encoding: utf8
-  database: db/test
-  username: ivan
-  password: 22
+  database: cmis_test
+  pool: 5
 
 production:
   adapter: postgresql
   encoding: utf8
-  database: db/production
-  username: ivan
-  password: 22
+  database: cmis_production
+  pool: 5
