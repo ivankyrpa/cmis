@@ -1,0 +1,30 @@
+<h1>Edit user</h1>
+
+<%= form_for(@user) do |f| %>
+<%= render 'shared/error_messages', :object => f.object %>
+  <div class="field">
+    <%= f.label :fio, "ФИО" %><br />
+    <%= f.text_field :fio %>
+  </div>
+  <div class="field">
+    <%= f.label :login, "Логин" %><br />
+    <%= f.text_field :login %>
+  </div>
+  <div class="field">
+    <% fields_for @user_type do |ut| %>
+      <%=ut.label :name %>
+      <%=ut.select("user", "[user_type_id]", UserType.all.collect {|t| [ t.name, t.id ] }) %>
+   <% end %>
+  </div>
+  <div class="field">
+    <%= f.label :password, "Пароль" %><br />
+    <%= f.password_field :password %>
+  </div>
+  <div class="field">
+    <%= f.label :password_confirmation, "Подтверждение пароля" %><br />
+    <%= f.password_field :password_confirmation %>
+  </div>
+  <div class="actions">
+    <%= f.submit "Update" %>
+  </div>
+<% end %>
