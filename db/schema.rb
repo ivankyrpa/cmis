@@ -24,7 +24,7 @@ ActiveRecord::Schema.define(:version => 20121118072027) do
     t.string   "login"
     t.datetime "created_at",         :null => false
     t.datetime "updated_at",         :null => false
-    t.integer  "type_user_id"
+    t.integer  "user_type_id"
     t.string   "encrypted_password"
     t.string   "salt"
   end

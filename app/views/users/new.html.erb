@@ -12,7 +12,7 @@
   </div>
   <div class="field">
     <%=f.label "Тип пользователя" %><br />
-    <%=f.select(:user_type, UserType.all.collect {|p| [ p.name, p.id ] }) %>
+    <%=f.select(:user_type_id, UserType.all.collect {|p| [ p.name, p.id ] }) %>
   </div>
   <div class="field">
     <%= f.label :password, "Пароль" %><br />

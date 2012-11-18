@@ -10,11 +10,7 @@ class UsersController < ApplicationController
   end
   
   def create
-    ddd = User.dioid
-    #@user = UserType.find(params[:user_type]).users.build(params[:user])
     @user = User.new(params[:user])
-    @info = params.to_s
-    @user.type_user_id = params[:type_user_id]
     if @user.save
       flash[:success] = "User created successfull."
       redirect_to @user
@@ -25,6 +21,7 @@ class UsersController < ApplicationController
   end
   
   def edit
+    @user = User.find(params[:id])
     @title = "Edit user"
   end
   

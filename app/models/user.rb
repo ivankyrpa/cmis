@@ -3,7 +3,7 @@ class User < ActiveRecord::Base
   belongs_to :user_type
   
   attr_accessor :password
-  attr_accessible :fio, :login, :type_user_id, :password, :password_confirmation
+  attr_accessible :fio, :login, :user_type_id, :password, :password_confirmation
   
   validates :login, :presence => true,
                     :length   => { :maximum => 10 },

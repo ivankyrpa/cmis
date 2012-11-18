@@ -1,6 +1,6 @@
 <table class="profile" summary="Profile information">
   <tr>
     <strong>FIO</strong> <%= @user.fio %><br />
-    <strong>User type</strong> <%= @info %>
+    <strong>User type</strong> <%= UserType.find(@user.user_type_id).name %>
   </tr>
 </table>
