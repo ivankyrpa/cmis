@@ -6,4 +6,8 @@ class PagesController < ApplicationController
   def contacts
     @title = "Contacts"
   end
+  
+  def welcome
+    @title = "Welcome"
+  end
 end

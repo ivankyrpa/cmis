@@ -1,6 +1,14 @@
 Cmis::Application.routes.draw do
+  resources :sessions, :only => [:new]
+  
+  match '/login',    :to => 'sessions#new'
+
   match '/contacts', :to => 'pages#contacts'
   match '/about',    :to => 'pages#about'
+  
+  root :to => "pages#welcome"
+  
+  
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

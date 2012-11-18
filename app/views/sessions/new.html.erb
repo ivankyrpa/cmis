@@ -1,0 +1,19 @@
+<h1><%= @title%></h1>
+
+<%= form_for() do %>
+  <div class="field">
+    <%= label "Login" %><br />
+    <%= text_field %>
+  </div>
+  <div class="field">
+    <%= label "Password" %><br />
+    <%= password_field :password %>
+  </div>
+  <div class="field">
+    <%= label "Type" %><br />
+    <%= select("post", "person_id", UserType.all.collect {|ut| [ ut.name, ut.id ] })  %>
+  </div>
+  <div class="actions">
+    <%= submit "Enter" %>
+  </div>
+<% end %>
