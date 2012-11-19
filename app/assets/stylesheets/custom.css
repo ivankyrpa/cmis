@@ -3,7 +3,7 @@
 }
 
 body {
-  background: #cff;
+  background: #ffffff;
 }
 
 header {
@@ -15,11 +15,16 @@ header img {
   background: #fff;
 }
 
-section {
+.div_section {
   margin-top: 1em;
   font-size: 120%;
   padding: 20px;
   background: #fff;
+  border: 1px solid #afafaf;
+}
+
+.div_inline {
+  display: block;
 }
 
 section h1 {
@@ -29,17 +34,17 @@ section h1 {
 /* Links */
 
 a {
-  color: #09c;
+  color: #ffffff;
   text-decoration: none;
 }
 
 a:hover {
-  color: #069;
+  color: #ffffff;
   text-decoration: underline;
 }
 
 a:visited {
-  color: #069;
+  color: #ffffff;
 }
 
 /* Navigation */
@@ -79,16 +84,7 @@ nav ul li a:hover {
 }
 
 a.signup_button {
-  margin-left: auto;
-  margin-right: auto;
-  display: block;
-  text-align: center;
-  width: 190px;
-  color: #fff;
-  background: #0000ff;
-  font-size: 150%;
-  font-weight: bold;
-  padding: 20px;
+  
 }
 
 /* Round corners */
