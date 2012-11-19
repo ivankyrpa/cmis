@@ -4,10 +4,13 @@
 #   Ensure the SQLite 3 gem is defined in your Gemfile
 #   gem 'sqlite3'
 development:
-    adapter: postgresql
-    encoding: utf-8
-    database: cmis_development 
-    pool: 5
+  adapter: postgresql
+  encoding: utf-8
+  database: cmis_development
+  username: ruby
+  password: ruby
+  host: localhost
+  pool: 5
   
 # Warning: The database defined as "test" will be erased and
 # re-generated from your development database when you run "rake".
@@ -16,10 +19,16 @@ test:
   adapter: postgresql
   encoding: utf-8
   database: cmis_test
+  username: ruby
+  password: ruby
+  host: localhost
   pool: 5
 
 production:
   adapter: postgresql
   encoding: utf-8
   database: cmis_production
+  username: ruby
+  password: ruby
+  host: localhost
   pool: 5
