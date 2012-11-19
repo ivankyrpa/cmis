@@ -1,37 +1,37 @@
 <header>
-  <script type="text/javascript">
-      $('.dropdown-toggle').dropdown();
-  </script>
-  <script src="bootstrap.min.js"></script>
   <div class="btn-toolbar" style="margin: 0;">
-      <div class="btn-group" >
-        <button class="btn dropdown-toggle btn-primary" data-toggle="dropdown">
-                    Администрирование
-          <span class="caret"></span>
-        </button>
-          <ul class="dropdown-menu" >
-            
-            <li class="dropdown-submenu">
-                    <a tabindex="-1" href="#">Пользователи</a>
-                    <ul class="dropdown-menu">
-                      <li><%= link_to "Создать", new_user_path, :tabindex => -1 %></li>
-                      <li><%= link_to "Весь список", users_path, :tabindex => -1 %></li>
-                    </ul>
-                  </li>
-            <li class="divider"></li>
-            <li><%= link_to "Справочники", "#" %></li>
-          </ul>
-      </div>
-      <div class="btn-group" >
-        <button class="btn dropdown-toggle btn-primary" data-toggle="dropdown">
-                    Помощь
-          <span class="caret"></span>
-        </button>
-          <ul class="dropdown-menu" >
-            <li><%= link_to "Контакты", contacts_path %></li>
-            <li><%= link_to "О системе", about_path %></li>
-          </ul>
-      </div>
-      <%= link_to "Выход", "#", :class => "btn btn-danger" %>
+    <% if signed_in? %>
+        <% if admin? %>
+          <div class="btn-group" >
+            <button class="btn dropdown-toggle btn-primary" data-toggle="dropdown">
+                        Администрирование
+              <span class="caret"></span>
+            </button>
+              <ul class="dropdown-menu" >
+                
+                <li class="dropdown-submenu">
+                        <a tabindex="-1" href="#">Пользователи</a>
+                        <ul class="dropdown-menu">
+                          <li><%= link_to "Создать", new_user_path, :tabindex => -1 %></li>
+                          <li><%= link_to "Весь список", users_path, :tabindex => -1 %></li>
+                        </ul>
+                      </li>
+                <li class="divider"></li>
+                <li><%= link_to "Справочники", "#" %></li>
+              </ul>
+          </div>
+        <% end %>
+        <div class="btn-group" >
+          <button class="btn dropdown-toggle btn-primary" data-toggle="dropdown">
+                      Помощь
+            <span class="caret"></span>
+          </button>
+            <ul class="dropdown-menu" >
+              <li><%= link_to "Контакты", contacts_path %></li>
+              <li><%= link_to "О системе", about_path %></li>
+            </ul>
+        </div>
+        <%= link_to "Выход", logout_path, :method => :delete, :class => "btn btn-danger" %>
+      <% end %>
   </div>
 </header>

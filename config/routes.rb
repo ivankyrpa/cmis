@@ -1,9 +1,10 @@
 Cmis::Application.routes.draw do
   resources :users
 
-  resources :sessions, :only => [:new]
+  resources :sessions, :only => [:new, :create, :destroy]
   
-  match '/login',    :to => 'sessions#new'
+  match '/login',  :to => 'sessions#new'
+  match '/logout', :to => 'sessions#destroy'
 
   match '/contacts', :to => 'pages#contacts'
   match '/about',    :to => 'pages#about'

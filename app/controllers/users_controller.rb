@@ -1,5 +1,7 @@
 class UsersController < ApplicationController
-  before_filter :authenticate, :only => [:index, :edit, :update]
+
+  before_filter :authenticate, :only => [:show]
+  before_filter :admin_authenticate, :only => [:new, :create, :edit, :update, :destroy, :index]
 
   def new
     @user = User.new
@@ -52,7 +54,11 @@ class UsersController < ApplicationController
   private 
     
     def authenticate
-      #deny_access unless signed_in?
+      deny_access unless signed_in?
+    end
+    
+    def admin_authenticate
+      deny_access unless admin?
     end
     
     def correct_user

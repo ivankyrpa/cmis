@@ -16,6 +16,10 @@ module SessionsHelper
     !current_user.nil?
   end
   
+  def admin?
+    signed_in? && (UserType.find(current_user.user_type_id).name == "admin")
+  end
+  
   def sign_out
     cookies.delete(:remember_token)
     self.current_user = nil
