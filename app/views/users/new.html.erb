@@ -2,7 +2,7 @@
 
 <%= form_for(@user) do |f| %>
   <%= render 'shared/error_messages', :object => f.object %>
-  <table width="100%" >
+  <!--table width="100%" >
     <tr>
       <td>
         <%= content_tag :div, :class => "field" do -%>
@@ -68,9 +68,9 @@
         <% end -%>
       </td>
     </tr>
-  </table>
+  </table-->
   
-  <!--div class="">
+  <div class="span2">
     <div class="field page-header">
     <h1><small>ФИО</small></h1>
       <%= f.text_field :fio %>
@@ -95,5 +95,5 @@
   </div>
   <div class="actions">
     <%= f.submit "Создать", :class => "btn btn-success btn-large"%>
-  </div-->
+  </div>
 <% end %>
