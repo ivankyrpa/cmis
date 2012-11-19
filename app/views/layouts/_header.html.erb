@@ -4,21 +4,34 @@
   </script>
   <script src="bootstrap.min.js"></script>
   <div class="btn-toolbar" style="margin: 0;">
-    <%= link_to "Пользователи", users_path, :class => "btn btn-primary" %>
-    <%= link_to "Справочники", "#", :class => "btn btn-primary" %>
-    <%= link_to "Выход", "#", :class => "btn btn-danger" %>
       <div class="btn-group" >
         <button class="btn dropdown-toggle btn-primary" data-toggle="dropdown">
-                        Как пример
+                    Администрирование
           <span class="caret"></span>
         </button>
           <ul class="dropdown-menu" >
-            <li><%= link_to "Contacts", contacts_path %></li>
-            <li><%= link_to "About", about_path %></li>
-            <li><a href="#">Something else here</a></li>
+            
+            <li class="dropdown-submenu">
+                    <a tabindex="-1" href="#">Пользователи</a>
+                    <ul class="dropdown-menu">
+                      <li><%= link_to "Создать", new_user_path, :tabindex => -1 %></li>
+                      <li><%= link_to "Весь список", users_path, :tabindex => -1 %></li>
+                    </ul>
+                  </li>
             <li class="divider"></li>
-            <li><a href="#">Separated link</a></li>
+            <li><%= link_to "Справочники", "#" %></li>
           </ul>
       </div>
+      <div class="btn-group" >
+        <button class="btn dropdown-toggle btn-primary" data-toggle="dropdown">
+                    Помощь
+          <span class="caret"></span>
+        </button>
+          <ul class="dropdown-menu" >
+            <li><%= link_to "Контакты", contacts_path %></li>
+            <li><%= link_to "О системе", about_path %></li>
+          </ul>
+      </div>
+      <%= link_to "Выход", "#", :class => "btn btn-danger" %>
   </div>
 </header>

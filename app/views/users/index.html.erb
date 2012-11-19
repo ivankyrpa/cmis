@@ -1,0 +1,47 @@
+<h1>Список пользователей</h1>
+
+<div align="center">
+  <% if @users.length == 0 %>
+    <h1><small> Список пуст. </small></h1>
+  <% else %>
+    <table width="90%">
+      <tr>
+        <td align="center">
+          <h1><small>ФИО </small></h1>
+        </td>
+        <td align="center">
+          <h1><small>Специализация </small></h1>
+        </td>
+        <td/>
+        <td/>
+      </tr>
+    <% @users.each do |user| %>
+      <!--div class="btn-toolbar div_section">
+      </div-->
+      
+        
+        <tr>
+          <td align="center">
+            <%= content_tag :p, user.fio %>
+          </td>
+          <td align="center">
+            <%= content_tag :p, type_by_id(user.user_type_id) %>
+          </td>
+          <td align="right">
+            <%= link_to "Изменить", edit_user_path(user.id), :class => "btn btn-primary btn-mini" %>
+            <%= link_to "Удалить", user, :class => "btn btn-danger btn-mini",
+                                :method => :delete, :confirm => "Вы уверены?",
+                                :title => "Удаление #{user.fio}" %>
+          </td>
+        </tr>
+    <% end %> 
+  <% end %>
+    <tr>
+      <td/>
+      <td align="center">
+        <%= link_to "Новый...", new_user_path, :class => "btn btn-primary" %>
+      </td>
+      <td/>
+    </tr>
+  </table>
+</div>

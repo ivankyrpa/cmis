@@ -3,7 +3,7 @@
 </div>
 <table class="profile" summary="Profile information">
   <tr>
-    <strong>FIO</strong> <%= @user.fio %><br />
-    <strong>User type</strong> <%= UserType.find(@user.user_type_id).name %>
+    <strong>ФИО</strong> <%= @user.fio %><br />
+    <strong>Специализация</strong> <%= UserType.find(@user.user_type_id).name %>
   </tr>
 </table>

@@ -6,6 +6,14 @@ body {
   background: #ffffff;
 }
 
+.divc{
+    width:100px;
+    height:100px;
+    position:absolute;
+    left:50%;
+    margin-left:-100px;
+}
+
 header {
   padding-top: 20px;
 }

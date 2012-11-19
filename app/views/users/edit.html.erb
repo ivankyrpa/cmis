@@ -1,28 +1,99 @@
-<h1>Edit user</h1>
+<h1>Редактирование </h1>
 
 <%= form_for(@user) do |f| %>
   <%= render 'shared/error_messages', :object => f.object %>
-  <div class="field">
-    <%= f.label :fio, "ФИО" %><br />
-    <%= f.text_field :fio %>
+  <table width="100%" >
+    <tr>
+      <td>
+        <%= content_tag :div, :class => "field" do -%>
+          <%= content_tag :h1 do -%>
+            <%= content_tag :small do -%>
+                          ФИО
+            <% end -%>
+          <% end -%>
+          <%= f.text_field :fio %>
+        <% end -%>
+      </td>
+      <td>
+         <%= content_tag :div, :class => "field" do -%>
+          <%= content_tag :h1 do -%>
+            <%= content_tag :small do -%>
+                            Специализация
+            <% end -%>
+           <% end -%>
+           <%=f.select(:user_type_id, UserType.all.collect {|p| [ p.name, p.id ] }) %>
+         <% end -%>
+      </td>
+    </tr>
+    <tr>
+      <td>
+         <%= content_tag :div, :class => "field" do -%>
+          <%= content_tag :h1 do -%>
+            <%= content_tag :small do -%>
+                          Логин
+            <% end -%>
+          <% end -%>
+          <%= f.text_field :login %>
+        <% end -%>
+      </td>
+    </tr>
+    <tr>
+      <td>
+         <%= content_tag :div, :class => "field" do -%>
+          <%= content_tag :h1 do -%>
+            <%= content_tag :small do -%>
+                          Пароль
+            <% end -%>
+          <% end -%>
+          <%= f.password_field  :password %>
+        <% end -%>
+      </td>
+      <td>
+        <%= content_tag :div, :class => "field" do -%>
+          <%= content_tag :h1 do -%>
+            <%= content_tag :small do -%>
+                          Подтверждение
+            <% end -%>
+          <% end -%>
+          <%= f.password_field :password_confirmation %>
+        <% end -%>
+      </td>
+    </tr>
+    <tr >
+      <td />
+      <td align="right">
+        <%= content_tag :div, :class => "actions btn-toolbar" do -%>
+          <%= link_to "К списку", users_path, :class => "btn btn-danger btn-large" %>
+          <%= f.submit "Сохранить", :class => "btn btn-success btn-large"%>
+        <% end -%>
+      </td>
+    </tr>
+  </table>
+  
+  <!--div class="">
+    <div class="field page-header">
+    <h1><small>ФИО</small></h1>
+      <%= f.text_field :fio %>
+    </div>
+    <div class="field page-header">
+      <h1><small>Специализация</small></h1>
+      <%=f.select(:user_type_id, UserType.all.collect {|p| [ p.name, p.id ] }) %>
+    </div>
   </div>
-  <div class="field">
-    <%= f.label :login, "Логин" %><br />
+  <div class="field page-header">
+    <h1><small>Логин</small></h1>
     <%= f.text_field :login %>
   </div>
-  <div class="field">
-    <%=f.label "Тип пользователя" %><br />
-    <%=f.select(:user_type_id, UserType.all.collect {|p| [ p.name, p.id ] }) %>
-  </div>
-  <div class="field">
-    <%= f.label :password, "Пароль" %><br />
+  
+  <div class="field page-header">
+    <h1><small>Пароль</small></h1>
     <%= f.password_field :password %>
   </div>
-  <div class="field">
-    <%= f.label :password_confirmation, "Подтверждение пароля" %><br />
+  <div class="field page-header">
+    <h1><small>Подтверждение</small></h1>
     <%= f.password_field :password_confirmation %>
   </div>
   <div class="actions">
-    <%= f.submit "Создать" %>
-  </div>
+    <%= f.submit "Создать", :class => "btn btn-success btn-large"%>
+  </div-->
 <% end %>
