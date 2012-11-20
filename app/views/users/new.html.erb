@@ -59,16 +59,11 @@
         <% end -%>
       </td>
     </tr>
-    <tr >
-      <td />
-      <td align="right">
-        <%= content_tag :div, :class => "actions btn-toolbar" do -%>
-          <%= link_to "К списку", users_path, :class => "btn btn-danger btn-large" %>
-          <%= f.submit "Создать", :class => "btn btn-success btn-large"%>
-        <% end -%>
-      </td>
-    </tr>
   </table>
+  <div class="divin5 actions btn-toolbar">
+    <%= f.submit "Создать", :class => "btn btn-danger btn-large"%>
+    <%= link_to "К списку", users_path, :class => "btn btn-inverse btn-large" %>
+  </div>
   
   <!--div class="">
     <div class="field page-header">

@@ -1,4 +1,6 @@
 Cmis::Application.routes.draw do
+  get "user_types/new"
+
   resources :users
 
   resources :sessions, :only => [:new, :create, :destroy]

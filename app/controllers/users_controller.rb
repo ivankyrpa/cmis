@@ -14,9 +14,14 @@ class UsersController < ApplicationController
   end
   
   def destroy
-    User.find(params[:id]).destroy
-    #flash[:success] = "User destroyed."
-    redirect_to users_path
+    user = User.find(params[:id])
+    if not_editable(user)
+      redirect_to user_path(params[:id])
+    else
+      user.destroy
+      #flash[:success] = "User destroyed."
+      redirect_to users_path
+    end
   end
   
   def show
@@ -37,7 +42,11 @@ class UsersController < ApplicationController
   
   def edit
     @user = User.find(params[:id])
-    @title = "Edit user"
+    if not_editable(@user)
+      redirect_to user_path(params[:id])
+    else
+      @title = "Edit user"
+    end
   end
   
   def update

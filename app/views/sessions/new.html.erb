@@ -1,19 +1,21 @@
+<div align="center">
+  <h1>Авторизация</h1>
+</div>
 <%= form_for(:session, :url => sessions_path) do |f| %>
   <div class="divin1 field">
-    <!--p>Логин</p-->
     <h1><small>Логин</small></h1>
   </div>
   <div class="divin2 field">
     <%= f.text_field :login %>
   </div>
   <div class="divin3 field">
-    <!--p>Пароль</p-->
     <h1><small>Пароль</small></h1>
   </div>  
   <div class="divin4 field">
     <%= f.password_field :password %>
   </div>
-  <div class="divin5 actions">
-    <%= f.submit "Вход", :class => "btn btn-info btn-large"%>
+  <div class="divin5 actions btn-toolbar">
+    <%= f.submit "Вход", :class => "btn btn-danger btn-large"%>
+    <%= link_to "Отмена", root_path, :class => "btn btn-inverse btn-large" %>
   </div>
 <% end %>

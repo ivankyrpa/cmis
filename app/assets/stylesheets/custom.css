@@ -79,18 +79,32 @@ section h1 {
 
 /* Links */
 
-a {
+.awhite {
   color: #ffffff;
   text-decoration: none;
 }
 
-a:hover {
+.awhite:hover {
   color: #ffffff;
-  text-decoration: underline;
+  text-decoration: none;
 }
 
-a:visited {
+.awhite:visited {
   color: #ffffff;
+}
+
+.ablack {
+  color: #000000;
+  text-decoration: none;
+}
+
+.ablack:hover {
+  color: #000000;
+  text-decoration: none;
+}
+
+.ablack:visited {
+  color: #000000;
 }
 
 /* Navigation */
@@ -122,7 +136,7 @@ nav ul li a {
 }
 
 nav ul li a:visited {
-  color: #09c;
+  color: #a5a5a5;
 }
 
 nav ul li a:hover {

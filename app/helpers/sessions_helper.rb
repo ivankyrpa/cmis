@@ -20,6 +20,10 @@ module SessionsHelper
     signed_in? && (UserType.find(current_user.user_type_id).name == "admin")
   end
   
+  def not_editable(user)
+    admin? && (current_user == user)
+  end
+  
   def sign_out
     cookies.delete(:remember_token)
     self.current_user = nil

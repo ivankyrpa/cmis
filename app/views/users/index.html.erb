@@ -21,17 +21,19 @@
       
         
         <tr>
-          <td align="center">
+          <td align="left">
             <%= content_tag :p, user.fio %>
           </td>
           <td align="center">
             <%= content_tag :p, type_by_id(user.user_type_id) %>
           </td>
           <td align="right">
-            <%= link_to "Изменить", edit_user_path(user.id), :class => "btn btn-primary btn-mini" %>
-            <%= link_to "Удалить", user, :class => "btn btn-danger btn-mini",
-                                :method => :delete, :confirm => "Вы уверены?",
-                                :title => "Удаление #{user.fio}" %>
+            <% if !not_editable(user) %>
+              <%= link_to "Изменить", edit_user_path(user.id), :class => "btn btn-mini ablack" %>
+              <%= link_to "Удалить", user, :class => "btn btn-danger btn-mini",
+                                  :method => :delete, :confirm => "Вы уверены?",
+                                  :title => "Удаление #{user.fio}" %>
+            <% end %>
           </td>
         </tr>
     <% end %> 
@@ -39,7 +41,7 @@
     <tr>
       <td/>
       <td align="center">
-        <%= link_to "Новый...", new_user_path, :class => "btn btn-primary" %>
+        <%= link_to "Новый...", new_user_path, :class => "btn btn-inverse" %>
       </td>
       <td/>
     </tr>

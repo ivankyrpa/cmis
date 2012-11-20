@@ -1,9 +1,10 @@
 <header>
   <div class="btn-toolbar" style="margin: 0;">
     <% if signed_in? %>
+        <%= link_to "Главная", login_path, :class => "btn btn-inverse" %>
         <% if admin? %>
           <div class="btn-group" >
-            <button class="btn dropdown-toggle btn-primary" data-toggle="dropdown">
+            <button class="btn dropdown-toggle" data-toggle="dropdown">
                         Администрирование
               <span class="caret"></span>
             </button>
@@ -22,7 +23,7 @@
           </div>
         <% end %>
         <div class="btn-group" >
-          <button class="btn dropdown-toggle btn-primary" data-toggle="dropdown">
+          <button class="btn dropdown-toggle" data-toggle="dropdown">
                       Помощь
             <span class="caret"></span>
           </button>

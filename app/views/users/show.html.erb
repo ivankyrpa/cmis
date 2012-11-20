@@ -1,9 +1,3 @@
-<div class="page-header">
-  <h1>Пользователь <small><%= @user.fio %></small></h1>
+<div class="page-header" align="center">
+  <h1>Здравтсвуйте, <%= @user.fio %>!</h1>
 </div>
-<table class="profile" summary="Profile information">
-  <tr>
-    <strong>ФИО</strong> <%= @user.fio %><br />
-    <strong>Специализация</strong> <%= UserType.find(@user.user_type_id).name %>
-  </tr>
-</table>

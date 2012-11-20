@@ -8,6 +8,13 @@ class PagesController < ApplicationController
   end
   
   def welcome
-    @title = "Welcome"
+    if current_user.nil?
+      @title = "Welcome"
+    else
+      redirect_to current_user
+    end
+  end
+  
+  def dictionaries
   end
 end

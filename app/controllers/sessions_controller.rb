@@ -1,6 +1,10 @@
 class SessionsController < ApplicationController
   def new
-    @title = "Log in"
+    if current_user.nil?
+      @title = "Log in"
+    else
+      redirect_to current_user
+    end
   end
 
   def create
@@ -18,6 +22,6 @@ class SessionsController < ApplicationController
 
   def destroy
     sign_out
-    redirect_to root_path
+    redirect_to login_path
   end
 end
