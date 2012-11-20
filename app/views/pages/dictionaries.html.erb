@@ -1,0 +1,73 @@
+<h1>Справочники</h1>
+
+<div class="groups" align="center" >
+  <%= form_tag() do |f| %>
+     <div class="group_box round" align="left">
+      <div class="label_box" align="center" >
+        <p>Местоположения </p>
+      </div>
+      <div >
+      <label class="radio label_rbtn">
+          <%= radio_button_tag 'dictionary', 'areas', true %>
+                   Области
+      </label>
+      <label class="radio label_rbtn">
+          <%= radio_button_tag 'dictionary', 'cities' %>
+                   Города
+      </label>
+      <label class="radio label_rbtn">
+          <%= radio_button_tag 'dictionary', 'streets' %>
+                    Районы         
+      </label>
+      </div> 
+     </div> 
+     
+     <div class="group_box round" align="left">
+      <div class="label_box" align="center" >
+        <p>Медицинские </p>
+      </div>
+      <div text-align="center" >
+        <label class="radio label_rbtn">
+          <%= radio_button_tag 'dictionary', 'diagnoz' %>
+                    Диагнозы         
+        </label>
+        <label class="radio label_rbtn">
+          <%= radio_button_tag 'dictionary', 'symptoms' %>
+                    Симптомы         
+        </label>
+        <label class="radio label_rbtn">
+          <%= radio_button_tag 'dictionary', 'analyzies' %>
+                    Типы анализов       
+        </label>
+        <label class="radio label_rbtn">
+          <%= radio_button_tag 'dictionary', 'operations' %>
+                    Хирургические операции       
+        </label>
+        <label class="radio label_rbtn">
+          <%= radio_button_tag 'dictionary', 'medicaments' %>
+                    Медикаменты               
+        </label>
+        <label class="radio label_rbtn">
+          <%= radio_button_tag 'dictionary', 'bloodgroups' %>
+                    Группы крови               
+        </label> 
+      </div> 
+     </div> 
+     <div class="group_box round" align="left">
+      <div class="label_box" align="center" >
+        <p>Общего характера </p>
+      </div>
+      <div text-align="center" >
+        <label class="radio label_rbtn">
+          <%= radio_button_tag 'dictionary', 'agegroups' %>
+                    Возрастные группы                
+        </label>
+        <label class="radio label_rbtn">
+          <%= radio_button_tag 'dictionary', 'specializations' %>
+                    Специализации                         
+        </label>
+      </div> 
+     </div> 
+     <%= link_to "Редактировать", "#", :class => "btn btn-danger btn-large" %>
+  <% end %>
+</div>

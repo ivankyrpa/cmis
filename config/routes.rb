@@ -8,8 +8,9 @@ Cmis::Application.routes.draw do
   match '/login',  :to => 'sessions#new'
   match '/logout', :to => 'sessions#destroy'
 
-  match '/contacts', :to => 'pages#contacts'
-  match '/about',    :to => 'pages#about'
+  match '/contacts',     :to => 'pages#contacts'
+  match '/about',        :to => 'pages#about'
+  match '/dictionaries', :to => 'pages#dictionaries'
   
   root :to => "pages#welcome"
   

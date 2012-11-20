@@ -32,6 +32,7 @@ header img {
 }
 
 .divin1 {
+  clear:left;
   float:left;
   width:250px;
   height:40px;
@@ -71,6 +72,39 @@ header img {
   width: 100%;
   text-align: center;
   padding: 5px;
+}
+
+.groups {
+  
+}
+
+.group_box {
+  margin: 50px;
+  padding: 10px;
+  padding-top: 8px;
+  background: #fff;
+  border: 1px solid #afafaf;
+  width: 50%;
+}
+
+.label_box {
+  margin-top: -18px; 
+  width: 50%;
+  font-weight: bold;
+  background-color: white;
+}
+
+.rbtn {
+  clear:left;
+  float:left;
+  width:30px;
+  text-align: center;
+  padding: 5px;
+}
+
+.label_rbtn {
+  font-size: 17px;
+  margin: 9px;
 }
 
 section h1 {

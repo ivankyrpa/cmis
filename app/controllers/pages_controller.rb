@@ -1,4 +1,8 @@
-class PagesController < ApplicationController
+class PagesController < ApplicationController  
+  
+  before_filter :authenticate, :only => [:about, :contacts, :welcome]
+  before_filter :admin_authenticate, :only => [:dictionaries]
+  
   def about
     @title = "About"
   end
@@ -8,13 +12,20 @@ class PagesController < ApplicationController
   end
   
   def welcome
-    if current_user.nil?
-      @title = "Welcome"
-    else
-      redirect_to current_user
-    end
+    @title = "Welcome"
   end
   
   def dictionaries
+    @title = "Dictionaries"  
   end
+  
+  private 
+    
+    def authenticate
+      deny_access unless signed_in?
+    end
+    
+    def admin_authenticate
+      deny_access unless admin?
+    end
 end
