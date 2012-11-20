@@ -1,6 +1,6 @@
 class PagesController < ApplicationController  
   
-  before_filter :authenticate, :only => [:about, :contacts, :welcome]
+  before_filter :authenticate, :only => [:about, :contacts]
   before_filter :admin_authenticate, :only => [:dictionaries]
   
   def about
