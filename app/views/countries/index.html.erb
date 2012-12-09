@@ -1,0 +1,33 @@
+<%- model_class = Country -%>
+<div class="page-header">
+  <h1>Страны</h1>
+</div>
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>Название</th>
+      <th>Действия</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @countries.each do |country| %>
+      <tr>
+        <td><%= country.name %></td>
+        <td>
+          <%= link_to "Изменить",
+                      edit_country_path(country), :class => 'btn btn-mini' %>
+          <%= link_to "Удалить",
+                      country_path(country),
+                      :method => :delete,
+                      :data => { :confirm => "Вы уверены?",
+                                  :title => "Подтверждение удаления"  },
+                      :class => 'btn btn-mini btn-danger awhite' %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<%= link_to "Новая...",
+            new_country_path,
+            :class => 'btn btn-primary awhite' %>

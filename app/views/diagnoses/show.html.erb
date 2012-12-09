@@ -1,0 +1,26 @@
+<%- model_class = Diagnosis -%>
+<div class="page-header">
+  <h1>Диагноз</h1>
+</div>
+
+<dl class="dl-horizontal">
+  <dt><strong>Код:</strong></dt>
+  <dd><%= @diagnosis.code %></dd>
+</dl>
+<dl class="dl-horizontal">
+  <dt><strong>Название:</strong></dt>
+  <dd><%= @diagnosis.name %></dd>
+</dl>
+
+<div class="form-actions">
+  <%= link_to "Отмена",
+              diagnoses_path, :class => 'btn'  %>
+  <%= link_to "Изменить",
+              edit_diagnosis_path(@diagnosis), :class => 'btn' %>
+  <%= link_to "Удалить",
+              diagnosis_path(@diagnosis),
+              :method => 'delete',
+              :data => { :confirm => "Вы уверены?",
+                                  :title => "Подтверждение удаления"  },
+              :class => 'btn btn-danger awhite' %>
+</div>

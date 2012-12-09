@@ -1,0 +1,35 @@
+<%- model_class = BloodGroup -%>
+<div class="page-header">
+  <h1>Группы крови</h1>
+</div>
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>Название</th>
+      <th>Действия</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @blood_groups.each do |blood_group| %>
+      <tr>
+        <td><%= blood_group.name %></td>
+        <td>
+          <%= link_to "Изменить",
+                      edit_blood_group_path(blood_group), :class => 'btn btn-mini' %>
+          <%= link_to "Удалить",
+                      blood_group_path(blood_group),
+                      :method => :delete,
+                      :data => { :confirm => "Вы уверены?",
+                                  :title => "Подтверждение удаления"  },
+                      :class => 'btn btn-mini btn-danger awhite' %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<% if BloodGroup.all.length < 4 %>
+<%= link_to "Новая...",
+            new_blood_group_path,
+            :class => 'btn btn-primary awhite' %>
+<% end %>

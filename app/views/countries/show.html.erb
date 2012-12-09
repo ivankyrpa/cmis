@@ -1,0 +1,22 @@
+<%- model_class = Country -%>
+<div class="page-header">
+  <h1>Страна</h1>
+</div>
+
+<dl class="dl-horizontal">
+  <dt><strong>Название:</strong></dt>
+  <dd><%= @country.name %></dd>
+</dl>
+
+<div class="form-actions">
+  <%= link_to "Назад",
+              countries_path, :class => 'btn'  %>
+  <%= link_to "Изменить",
+              edit_country_path(@country), :class => 'btn' %>
+  <%= link_to "Удалить",
+              country_path(@country),
+              :method => 'delete',
+              :data => { :confirm => "Вы уверены?",
+                                  :title => "Подтверждение удаления"  },
+              :class => 'btn btn-danger awhite' %>
+</div>

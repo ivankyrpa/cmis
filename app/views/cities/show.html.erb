@@ -1,0 +1,22 @@
+<%- model_class = City -%>
+<div class="page-header">
+  <h1>Город</h1>
+</div>
+
+<dl class="dl-horizontal">
+  <dt><strong>Название:</strong></dt>
+  <dd><%= @city.name %></dd>
+</dl>
+
+<div class="form-actions">
+  <%= link_to "Назад",
+              cities_path, :class => 'btn'  %>
+  <%= link_to "Изменить",
+              edit_city_path(@city), :class => 'btn' %>
+  <%= link_to "Удалить",
+              city_path(@city),
+              :method => 'delete',
+              :data => { :confirm => "Вы уверены?",
+                                  :title => "Подтверждение удаления"  },
+              :class => 'btn btn-danger awhite' %>
+</div>

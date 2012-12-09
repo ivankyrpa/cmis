@@ -1,73 +1,50 @@
 <h1>Справочники</h1>
-
-<div class="groups" align="center" >
-  <%= form_tag() do |f| %>
-     <div class="group_box round" align="left">
-      <div class="label_box" align="center" >
-        <p>Местоположения </p>
-      </div>
-      <div >
-      <label class="radio label_rbtn">
-          <%= radio_button_tag 'dictionary', 'areas', true %>
-                   Области
-      </label>
-      <label class="radio label_rbtn">
-          <%= radio_button_tag 'dictionary', 'cities' %>
-                   Города
-      </label>
-      <label class="radio label_rbtn">
-          <%= radio_button_tag 'dictionary', 'streets' %>
-                    Районы         
-      </label>
-      </div> 
-     </div> 
+    <div class="alert alert-info">
+            Выберите справочник для редактирования
+    </div>
+    <div class="newblock" >
+     <div class="btn-group" >
+          <button class="btn dropdown-toggle" data-toggle="dropdown">
+                        Местоположение
+            <span class="caret"></span>
+          </button>
+            <ul class="dropdown-menu" >
+              <li><%= link_to "Страны", countries_path %></li>
+              <li><%= link_to "Области", regions_path %></li>
+              <li><%= link_to "Населенные пункты", settlements_path %></li>
+              <li><%= link_to "Города", cities_path %></li>
+              <li><%= link_to "Районы", districts_path %></li>
+              <li><%= link_to "Улицы", streets_path %></li>
+            </ul>
+     </div>
      
-     <div class="group_box round" align="left">
-      <div class="label_box" align="center" >
-        <p>Медицинские </p>
-      </div>
-      <div text-align="center" >
-        <label class="radio label_rbtn">
-          <%= radio_button_tag 'dictionary', 'diagnoz' %>
-                    Диагнозы         
-        </label>
-        <label class="radio label_rbtn">
-          <%= radio_button_tag 'dictionary', 'symptoms' %>
-                    Симптомы         
-        </label>
-        <label class="radio label_rbtn">
-          <%= radio_button_tag 'dictionary', 'analyzies' %>
-                    Типы анализов       
-        </label>
-        <label class="radio label_rbtn">
-          <%= radio_button_tag 'dictionary', 'operations' %>
-                    Хирургические операции       
-        </label>
-        <label class="radio label_rbtn">
-          <%= radio_button_tag 'dictionary', 'medicaments' %>
-                    Медикаменты               
-        </label>
-        <label class="radio label_rbtn">
-          <%= radio_button_tag 'dictionary', 'bloodgroups' %>
-                    Группы крови               
-        </label> 
-      </div> 
-     </div> 
-     <div class="group_box round" align="left">
-      <div class="label_box" align="center" >
-        <p>Общего характера </p>
-      </div>
-      <div text-align="center" >
-        <label class="radio label_rbtn">
-          <%= radio_button_tag 'dictionary', 'agegroups' %>
-                    Возрастные группы                
-        </label>
-        <label class="radio label_rbtn">
-          <%= radio_button_tag 'dictionary', 'specializations' %>
-                    Специализации                         
-        </label>
-      </div> 
-     </div> 
-     <%= link_to "Редактировать", "#", :class => "btn btn-danger btn-large" %>
-  <% end %>
-</div>
+     <div class="btn-group" >
+          <button class="btn dropdown-toggle" data-toggle="dropdown">
+                        Медицинские
+            <span class="caret"></span>
+          </button>
+            <ul class="dropdown-menu" >
+              <li><%= link_to "Диагнозы", diagnoses_path %></li>
+              <li><%= link_to "Симптомы", symptoms_path %></li>
+              <li><%= link_to "Типы анализов", analysis_types_path %></li>
+              <li><%= link_to "Хирургические операции", operations_path %></li>
+              <li><%= link_to "Медикаменты", medicaments_path %></li>
+              <li><%= link_to "Группы крови", blood_groups_path %></li>
+              <li><%= link_to "Типы лечения", treatment_types_path %></li>
+            </ul>
+     </div>     
+
+     <div class="btn-group" >
+          <button class="btn dropdown-toggle" data-toggle="dropdown">
+                        Общего характера
+            <span class="caret"></span>
+          </button>
+            <ul class="dropdown-menu" >
+              <li><%= link_to "Возрастные группы", age_groups_path %></li>
+              <li><%= link_to "Специализации", user_types_path %></li>
+              <li><%= link_to "Страховые компании", insurance_companies_path %></li>
+              <li><%= link_to "Тип страхового полиса", insurance_types_path %></li>
+            </ul>
+     </div>
+   </div>
+     

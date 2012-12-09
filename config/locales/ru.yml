@@ -1,0 +1,28 @@
+ru:
+  activerecord: 
+    attributes:
+      address: 
+        house: "Дом"
+        flat: "Квартира"
+      country: 
+        name: "Название"
+      region: 
+        name: "Название"
+      city: 
+        name: "Название"
+      settlement: 
+        name: "Название"
+      district: 
+        name: "Название"
+      street: 
+        name: "Название"
+      
+  actions:
+    new: "Новый"
+    edit: "Изменить"
+    delete: "Удалить"
+    cancel: "Отмена"
+    back: "Назад"
+    
+      
+        

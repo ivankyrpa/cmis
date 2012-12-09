@@ -30,7 +30,7 @@
           <td align="right">
             <% if !not_editable(user) %>
               <%= link_to "Изменить", edit_user_path(user.id), :class => "btn btn-mini ablack" %>
-              <%= link_to "Удалить", user, :class => "btn btn-danger btn-mini",
+              <%= link_to "Удалить", user, :class => "btn btn-danger btn-mini awhite",
                                   :method => :delete, :confirm => "Вы уверены?",
                                   :title => "Удаление #{user.fio}" %>
             <% end %>
@@ -41,7 +41,7 @@
     <tr>
       <td/>
       <td align="center">
-        <%= link_to "Новый...", new_user_path, :class => "btn btn-inverse" %>
+        <%= link_to "Новый...", new_user_path, :class => "btn btn-primary awhite" %>
       </td>
       <td/>
     </tr>

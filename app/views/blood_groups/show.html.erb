@@ -1,0 +1,22 @@
+<%- model_class = BloodGroup -%>
+<div class="page-header">
+  <h1>Группа крови</h1>
+</div>
+
+<dl class="dl-horizontal">
+  <dt><strong>Название:</strong></dt>
+  <dd><%= @blood_group.name %></dd>
+</dl>
+
+<div class="form-actions">
+  <%= link_to "Назад",
+              blood_groups_path, :class => 'btn'  %>
+  <%= link_to "Изменить",
+              edit_blood_group_path(@blood_group), :class => 'btn' %>
+  <%= link_to "Удалить",
+              blood_group_path(@blood_group),
+              :method => 'delete',
+              :data => { :confirm => "Вы уверены?",
+                                  :title => "Подтверждение удаления"  },
+              :class => 'btn btn-danger awhite' %>
+</div>

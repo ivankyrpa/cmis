@@ -1,0 +1,33 @@
+<%- model_class = AgeGroup -%>
+<div class="page-header">
+  <h1>Возрастные группы</h1>
+</div>
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>Диапазон</th>
+      <th>Действия</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @age_groups.each do |age_group| %>
+      <tr>
+        <td><%= age_group.from.to_s + "..." + age_group.to.to_s %></td>
+        <td>
+          <%= link_to "Изменить",
+                      edit_age_group_path(age_group), :class => 'btn btn-mini' %>
+          <%= link_to "Удалить",
+                      age_group_path(age_group),
+                      :method => :delete,
+                      :data => { :confirm => "Вы уверены?",
+                                  :title => "Подтверждение удаления"  },
+                      :class => 'btn btn-mini btn-danger awhite' %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<%= link_to "Новая...",
+            new_age_group_path,
+            :class => 'btn btn-primary awhite' %>

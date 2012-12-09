@@ -1,3 +1,4 @@
+# coding: utf-8
 class UsersController < ApplicationController
 
   before_filter :authenticate, :only => [:show]
@@ -5,11 +6,11 @@ class UsersController < ApplicationController
 
   def new
     @user = User.new
-    @title = "New user"
+    @title = "Новый пользователь"
   end
   
   def index
-    @title = "All users"
+    @title = "Пользователи"
     @users = User.all
   end
   
@@ -19,25 +20,26 @@ class UsersController < ApplicationController
       redirect_to user_path(params[:id])
     else
       user.destroy
-      #flash[:success] = "User destroyed."
+      flash[:success] = "Пользователь удален."
       redirect_to users_path
     end
   end
   
   def show
     @user = User.find(params[:id])
-    @title = "User #{@user.fio}"
+    @title = "Пользователь #{@user.fio}"
   end
   
   def create
     @user = User.new(params[:user])
     if @user.save
-      #flash[:success] = "User created successfull."
+      flash[:success] = "Пользователь успешно добавлен."
       redirect_to users_path
     else
-      @title = "New user"
+      flash.now[:error] = "Введены неверные данные."
+      @title = "Новый пользователь"
       render 'new'
-    end 
+    end  
   end
   
   def edit
@@ -45,17 +47,18 @@ class UsersController < ApplicationController
     if not_editable(@user)
       redirect_to user_path(params[:id])
     else
-      @title = "Edit user"
+      @title = "Редактирование пользователя"
     end
   end
   
   def update
     @user = User.find(params[:id])
     if @user.update_attributes(params[:user])
-      #flash[:success] = "User profile updated."
+      flash[:success] = "Информация о пользователе изменена."
       redirect_to users_path
     else
-      @title = "Edit user"
+      flash.now[:error] = "Введены неверные данные."
+      @title = "Редактирование пользователя"
       render 'edit'
     end
   end

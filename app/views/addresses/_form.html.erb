@@ -1,0 +1,57 @@
+<%= form_for @address, :html => { :class => 'form-horizontal' } do |f| %>
+  <div class="control-group">
+    <%= f.label :country_id, :class => 'control-label' %>
+    <div class="controls">
+      <%=f.select(:country_id, Country.all.collect {|p| [ p.name, p.id ] }) %>
+    </div>
+  </div>
+  <div class="control-group">
+    <%= f.label :region_id, :class => 'control-label' %>
+    <div class="controls">
+      <%=f.select(:region_id, Region.all.collect {|p| [ p.name, p.id ] }) %>
+    </div>
+  </div>
+  <div class="control-group">
+    <%= f.label :city_id, :class => 'control-label' %>
+    <div class="controls">
+      <%=f.select(:city_id, City.all.collect {|p| [ p.name, p.id ] }) %>
+    </div>
+  </div>
+  <div class="control-group">
+    <%= f.label :settlement_id, :class => 'control-label' %>
+    <div class="controls">
+      <%=f.select(:settlement_id, Settlement.all.collect {|p| [ p.name, p.id ] }) %>
+    </div>
+  </div>
+  <div class="control-group">
+    <%= f.label :district_id, :class => 'control-label' %>
+    <div class="controls">
+      <%=f.select(:district_id, District.all.collect {|p| [ p.name, p.id ] }) %>
+    </div>
+  </div>
+  <div class="control-group">
+    <%= f.label :street_id, :class => 'control-label' %>
+    <div class="controls">
+      <%=f.select(:street_id, Street.all.collect {|p| [ p.name, p.id ] }, :class => 'text_field') %>
+      <%= f.text_field :street_id, :class => 'text_field' %>
+    </div>
+  </div>
+  <div class="control-group">
+    <%= f.label :house, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :house, :class => 'text_field' %>
+    </div>
+  </div>
+  <div class="control-group">
+    <%= f.label :flat, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :flat, :class => 'text_field' %>
+    </div>
+  </div>
+
+  <div class="form-actions">
+    <%= f.submit nil, :class => 'btn btn-primary awhite' %>
+    <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
+                addresses_path, :class => 'btn' %>
+  </div>
+<% end %>

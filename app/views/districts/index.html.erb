@@ -1,0 +1,33 @@
+<%- model_class = District -%>
+<div class="page-header">
+  <h1>Районы</h1>
+</div>
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>Название</th>
+      <th>Действия</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @districts.each do |district| %>
+      <tr>
+        <td><%= district.name %></td>
+        <td>
+          <%= link_to "Изменить",
+                      edit_district_path(district), :class => 'btn btn-mini' %>
+          <%= link_to "Удалить",
+                      district_path(district),
+                      :method => :delete,
+                      :data => { :confirm => "Вы уверены?",
+                                  :title => "Подтверждение удаления"  },
+                      :class => 'btn btn-mini btn-danger awhite' %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<%= link_to "Новый...",
+            new_district_path,
+            :class => 'btn btn-primary awhite' %>

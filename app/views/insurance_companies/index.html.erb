@@ -1,0 +1,33 @@
+<%- model_class = InsuranceCompany -%>
+<div class="page-header">
+  <h1>Страховые компании</h1>
+</div>
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>Название</th>
+      <th>Действия</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @insurance_companies.each do |insurance_company| %>
+      <tr>
+        <td><%= insurance_company.name %></td>
+        <td>
+          <%= link_to "Изменить",
+                      edit_insurance_company_path(insurance_company), :class => 'btn btn-mini' %>
+          <%= link_to "Удалить",
+                      insurance_company_path(insurance_company),
+                      :method => :delete,
+                      :data => { :confirm => "Вы уверены?",
+                                  :title => "Подтверждение удаления"  },
+                      :class => 'btn btn-mini btn-danger awhite' %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<%= link_to "Новая...",
+            new_insurance_company_path,
+            :class => 'btn btn-primary awhite' %>

@@ -1,0 +1,22 @@
+<%- model_class = Symptom -%>
+<div class="page-header">
+  <h1>Симптом</h1>
+</div>
+
+<dl class="dl-horizontal">
+  <dt><strong>Название:</strong></dt>
+  <dd><%= @symptom.name %></dd>
+</dl>
+
+<div class="form-actions">
+  <%= link_to "Отмена",
+              symptoms_path, :class => 'btn'  %>
+  <%= link_to "Изменить",
+              edit_symptom_path(@symptom), :class => 'btn' %>
+  <%= link_to "Удалить",
+              symptom_path(@symptom),
+              :method => 'delete',
+              :data => { :confirm => "Вы уверены?",
+                                  :title => "Подтверждение удаления"  },
+              :class => 'btn btn-danger awhite' %>
+</div>

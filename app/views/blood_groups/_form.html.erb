@@ -1,0 +1,14 @@
+<%= form_for @blood_group, :html => { :class => 'form-horizontal' } do |f| %>
+  <div class="control-group">
+    <%= f.label "Название", :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :name, :class => 'text_field' %>
+    </div>
+  </div>
+
+  <div class="form-actions">
+    <%= f.submit "Сохранить", :class => 'btn btn-primary  awhite' %>
+    <%= link_to "Отмена",
+                blood_groups_path, :class => 'btn' %>
+  </div>
+<% end %>

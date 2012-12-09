@@ -1,4 +1,41 @@
 Cmis::Application.routes.draw do
+
+  resources :user_types
+
+  resources :insurance_companies
+
+  resources :insurance_types
+
+  resources :treatment_types
+
+  resources :age_groups
+
+  resources :blood_groups
+
+  resources :medicaments
+
+  resources :operations
+
+  resources :analysis_types
+
+  resources :symptoms
+
+  resources :diagnoses
+
+  resources :addresses
+
+  resources :countries
+
+  resources :regions
+
+  resources :settlements
+
+  resources :cities
+
+  resources :districts
+
+  resources :streets
+
   get "user_types/new"
 
   resources :users

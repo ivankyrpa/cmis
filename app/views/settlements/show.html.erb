@@ -1,0 +1,22 @@
+<%- model_class = Settlement -%>
+<div class="page-header">
+  <h1>Населенный пункт</h1>
+</div>
+
+<dl class="dl-horizontal">
+  <dt><strong>Название:</strong></dt>
+  <dd><%= @settlement.name %></dd>
+</dl>
+
+<div class="form-actions">
+  <%= link_to "Назад",
+              settlements_path, :class => 'btn'  %>
+  <%= link_to "Изменить",
+              edit_settlement_path(@settlement), :class => 'btn' %>
+  <%= link_to "Удалить",
+              settlement_path(@settlement),
+              :method => 'delete',
+              :data => { :confirm => "Вы уверены?",
+                                  :title => "Подтверждение удаления"  },
+              :class => 'btn btn-danger awhite' %>
+</div>

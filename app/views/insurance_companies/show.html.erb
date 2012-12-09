@@ -1,0 +1,22 @@
+<%- model_class = InsuranceCompany -%>
+<div class="page-header">
+  <h1>Страховая компания</h1>
+</div>
+
+<dl class="dl-horizontal">
+  <dt><strong>Название:</strong></dt>
+  <dd><%= @insurance_company.name %></dd>
+</dl>
+
+<div class="form-actions">
+  <%= link_to "Отмена",
+              insurance_companies_path, :class => 'btn'  %>
+  <%= link_to "Изменить",
+              edit_insurance_company_path(@insurance_company), :class => 'btn' %>
+  <%= link_to "Удалить",
+              insurance_company_path(@insurance_company),
+              :method => 'delete',
+              :data => { :confirm => "Вы уверены?",
+                                  :title => "Подтверждение удаления"  },
+              :class => 'btn btn-danger awhite' %>
+</div>

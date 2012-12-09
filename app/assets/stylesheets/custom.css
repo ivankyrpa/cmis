@@ -74,8 +74,18 @@ header img {
   padding: 5px;
 }
 
-.groups {
-  
+.vertblock {
+  clear:left;
+  width: 100%;
+  text-align: left;
+  padding: 25px;
+}
+
+.newblock {
+  clear:left;
+  width: 100%;
+  text-align: left;
+  padding: 30px;
 }
 
 .group_box {
@@ -170,7 +180,7 @@ nav ul li a {
 }
 
 nav ul li a:visited {
-  color: #a5a5a5;
+  color: #09c;
 }
 
 nav ul li a:hover {
@@ -227,17 +237,6 @@ td.sidebar {
 
 div.field, div.actions {
   margin-bottom: 10px;
-}
-
-.field_with_errors {
-  margin-top: 10px;
-  padding: 2px;
-  background-color: red;
-  display: table;
-}
-
-.field_with_errors label {
-  color: #fff;
 }
 
 #error_explanation {

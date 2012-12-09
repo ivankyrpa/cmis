@@ -1,0 +1,46 @@
+<%- model_class = Address -%>
+<div class="page-header">
+  <h1><%=t '.title', :default => model_class.model_name.human.pluralize %></h1>
+</div>
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th><%= model_class.human_attribute_name(:country_id) %></th>
+      <th><%= model_class.human_attribute_name(:region_id) %></th>
+      <th><%= model_class.human_attribute_name(:city_id) %></th>
+      <th><%= model_class.human_attribute_name(:settlement_id) %></th>
+      <th><%= model_class.human_attribute_name(:district_id) %></th>
+      <th><%= model_class.human_attribute_name(:street_id) %></th>
+      <th><%= model_class.human_attribute_name(:house) %></th>
+      <th><%= model_class.human_attribute_name(:flat) %></th>
+      <th><%=t '.actions', :default => t("helpers.actions") %></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @addresses.each do |address| %>
+      <tr>
+        <td><%= address.country_id %></td>
+        <td><%= address.region_id %></td>
+        <td><%= address.city_id %></td>
+        <td><%= address.settlement_id %></td>
+        <td><%= address.district_id %></td>
+        <td><%= address.street_id %></td>
+        <td><%= address.house %></td>
+        <td><%= address.flat %></td>
+        <td>
+          <%= link_to t('.edit', :default => t("helpers.edit")),
+                      edit_address_path(address), :class => 'btn btn-mini' %>
+          <%= link_to t('.destroy', :default => t("helpers.delete")),
+                      address_path(address),
+                      :method => :delete,
+                      :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
+                      :class => 'btn btn-mini btn-danger awhite' %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<%= link_to t('.new', :default => t("helpers.new")),
+            new_address_path,
+            :class => 'btn btn-primary awhite' %>

@@ -1,0 +1,22 @@
+<%- model_class = District -%>
+<div class="page-header">
+  <h1>Район</h1>
+</div>
+
+<dl class="dl-horizontal">
+  <dt><strong>Название:</strong></dt>
+  <dd><%= @district.name %></dd>
+</dl>
+
+<div class="form-actions">
+  <%= link_to "Назад",
+              districts_path, :class => 'btn'  %>
+  <%= link_to "Изменить",
+              edit_district_path(@district), :class => 'btn' %>
+  <%= link_to "Удалить",
+              district_path(@district),
+              :method => 'delete',
+              :data => { :confirm => "Вы уверены?",
+                                  :title => "Подтверждение удаления"  },
+              :class => 'btn btn-danger awhite' %>
+</div>

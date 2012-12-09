@@ -1,0 +1,33 @@
+<%- model_class = Settlement -%>
+<div class="page-header">
+  <h1>Населенные пункты</h1>
+</div>
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>Название</th>
+      <th>Действия</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @settlements.each do |settlement| %>
+      <tr>
+        <td><%= settlement.name %></td>
+        <td>
+          <%= link_to "Изменить",
+                      edit_settlement_path(settlement), :class => 'btn btn-mini' %>
+          <%= link_to "Удалить",
+                      settlement_path(settlement),
+                      :method => :delete,
+                      :data => { :confirm => "Вы уверены?",
+                                  :title => "Подтверждение удаления"  },
+                      :class => 'btn btn-mini btn-danger awhite' %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<%= link_to "Новый...",
+            new_settlement_path,
+            :class => 'btn btn-primary awhite' %>

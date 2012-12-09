@@ -1,7 +1,8 @@
+# coding: utf-8
 class SessionsController < ApplicationController
   def new
     if current_user.nil?
-      @title = "Log in"
+      @title = "Вход"
     else
       redirect_to current_user
     end
@@ -11,8 +12,8 @@ class SessionsController < ApplicationController
     user = User.authenticate(params[:session][:login],
                              params[:session][:password])
     if user.nil?
-      #flash.now[:error] = "Invalid login/password combination."
-      @title = "Log in"
+      flash.now[:error] = "Неверная пара: логин - пароль!"
+      @title = "Вход"
       render 'new'
     else
       sign_in user

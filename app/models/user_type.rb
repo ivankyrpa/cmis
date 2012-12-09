@@ -1,5 +1,7 @@
 class UserType < ActiveRecord::Base
-  has_many :users
+  has_many :users, :dependent => :restrict
   
-  attr_accessible :name
+  validates :name, :presence   => true,
+                   :length     => { :maximum => 40 },
+                   :uniqueness => { :case_sensitive => false }
 end
