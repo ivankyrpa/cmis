@@ -97,7 +97,7 @@ class PacientsController < ApplicationController
   # GET /pacients/new.json
   def new
     @title = "Добавление пациента"
-    @pacient = Pacient.new(:sex => true)
+    @pacient = Pacient.new(:sex => true, :birthdate => Date.new(1980, 1, 1))
     @pacient.build_address
     @pacient.build_policy
 
