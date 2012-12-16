@@ -11,11 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-<<<<<<< HEAD
-ActiveRecord::Schema.define(:version => 20121216112506) do
-=======
-ActiveRecord::Schema.define(:version => 20121209015310) do
->>>>>>> 680b2b14a6343a0c7c06ad385df250ed0e4e252a
+ActiveRecord::Schema.define(:version => 20121215083655) do
 
   create_table "addresses", :force => true do |t|
     t.string   "country_id"
@@ -135,8 +131,6 @@ ActiveRecord::Schema.define(:version => 20121209015310) do
     t.datetime "updated_at",      :null => false
     t.integer  "passport_seria"
     t.integer  "passport_number"
-    t.integer  "policy_id"
-    t.integer  "address_id"
   end
 
   add_index "pacients", ["passport_number", "passport_seria"], :name => "index_pacients_on_passport_number_and_passport_seria", :unique => true
