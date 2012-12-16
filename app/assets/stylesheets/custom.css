@@ -6,7 +6,7 @@ body {
   background: #ffffff;
 }
 
-.divc{
+.divc {
     width:100px;
     height:100px;
     position:absolute;
@@ -89,19 +89,48 @@ header img {
 }
 
 .group_box {
-  margin: 50px;
-  padding: 10px;
-  padding-top: 8px;
+  margin: 20px;
+  margin-bottom: 40px;
+  padding: 20px;
+  padding-top: 20px;
   background: #fff;
   border: 1px solid #afafaf;
-  width: 50%;
+  width: 88%;
 }
 
 .label_box {
-  margin-top: -18px; 
-  width: 50%;
+  margin-top: -50px; 
+  width: 40%;
   font-weight: bold;
   background-color: white;
+}
+
+.dcenter {
+   padding-top: 15px;
+}
+
+.first-cell {
+   padding-top: 8px;
+   padding-left: 3px;
+   padding-right: 3px;
+   border-style: solid;
+   border-color: #000; 
+   border-top-width: 1px;
+   border-left-width: 1px;
+   border-right-width: 1px;
+   border-bottom-width: 1px;
+}
+
+.cell-border {
+   padding-top: 8px;
+   padding-left: 3px;
+   padding-right: 3px;
+   border-style: solid;
+   border-color: #000; 
+   border-top-width: 0px;
+   border-left-width: 1px;
+   border-right-width: 1px;
+   border-bottom-width: 1px;
 }
 
 .rbtn {

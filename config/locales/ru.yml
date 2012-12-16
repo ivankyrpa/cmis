@@ -24,5 +24,14 @@ ru:
     cancel: "Отмена"
     back: "Назад"
     
+  date:   
+  formats: 
+    default: ""
+    long: ""
+    short: ""
+  order:
+    - :year
+    - :month
+    - :day
       
         

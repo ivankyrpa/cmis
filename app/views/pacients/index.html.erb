@@ -1,0 +1,40 @@
+<%- model_class = Pacient -%>
+<div class="page-header">
+  <h1>Пациенты</h1>
+</div>
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>ФИО</th>
+      <th>Документы</th>
+      <th>Действия</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @pacients.each do |pacient| %>
+      <tr>
+        <td><%= link_to "#{pacient.lastname} #{pacient.firstname[0]}.#{pacient.middlename[0]}.", pacient_path(pacient) %></td>
+        <td>
+          <%= link_to "Медицинская карта",
+                      "#", :class => 'btn btn-mini btn-inverse awhite' %>
+          <%= link_to "История болезни",
+                      "#", :class => 'btn btn-mini btn-info awhite' %>
+        </td>
+        <td>
+          <%= link_to "Изменить",
+                      edit_pacient_path(pacient), :class => 'btn btn-mini' %>
+          <%= link_to "Удалить",
+                      pacient_path(pacient),
+                      :method => :delete,
+                      :data => { :confirm => "Вы уверены?",
+                                  :title => "Подтверждение удаления"  },
+                      :class => 'btn btn-mini btn-danger awhite' %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<%= link_to "Новый...",
+            new_pacient_path,
+            :class => 'btn btn-primary awhite' %>

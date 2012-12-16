@@ -41,13 +41,13 @@ class AgeGroupsController < ApplicationController
 
   # GET /age_groups/1/edit
   def edit
+    @title = "Редактирование возрастной группы"
     @age_group = AgeGroup.find(params[:id])
   end
 
   # POST /age_groups
   # POST /age_groups.json
   def create
-    @title = "Редактирование возрастной группы"
     @age_group = AgeGroup.new(params[:age_group])
 
     respond_to do |format|

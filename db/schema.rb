@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121208180703) do
+ActiveRecord::Schema.define(:version => 20121216112506) do
 
   create_table "addresses", :force => true do |t|
     t.string   "country_id"
@@ -24,6 +24,7 @@ ActiveRecord::Schema.define(:version => 20121208180703) do
     t.string   "flat"
     t.datetime "created_at",    :null => false
     t.datetime "updated_at",    :null => false
+    t.integer  "pacient_id"
   end
 
   create_table "age_groups", :force => true do |t|
@@ -82,6 +83,13 @@ ActiveRecord::Schema.define(:version => 20121208180703) do
 
   add_index "districts", ["name"], :name => "index_districts_on_name", :unique => true
 
+  create_table "groups", :force => true do |t|
+    t.integer  "user_type_id"
+    t.string   "name"
+    t.datetime "created_at",   :null => false
+    t.datetime "updated_at",   :null => false
+  end
+
   create_table "insurance_companies", :force => true do |t|
     t.string   "name"
     t.datetime "created_at", :null => false
@@ -109,6 +117,34 @@ ActiveRecord::Schema.define(:version => 20121208180703) do
   end
 
   add_index "operations", ["name"], :name => "index_operations_on_name", :unique => true
+
+  create_table "pacients", :force => true do |t|
+    t.string   "lastname"
+    t.string   "middlename"
+    t.string   "firstname"
+    t.date     "birthdate"
+    t.boolean  "sex"
+    t.string   "phone"
+    t.integer  "age_group_id"
+    t.integer  "blood_group_id"
+    t.datetime "created_at",      :null => false
+    t.datetime "updated_at",      :null => false
+    t.integer  "passport_seria"
+    t.integer  "passport_number"
+    t.integer  "policy_id"
+    t.integer  "address_id"
+  end
+
+  add_index "pacients", ["passport_number", "passport_seria"], :name => "index_pacients_on_passport_number_and_passport_seria", :unique => true
+
+  create_table "policies", :force => true do |t|
+    t.string   "number"
+    t.integer  "insurance_company_id"
+    t.integer  "insurance_type_id"
+    t.integer  "pacient_id"
+    t.datetime "created_at",           :null => false
+    t.datetime "updated_at",           :null => false
+  end
 
   create_table "regions", :force => true do |t|
     t.string   "name"
@@ -155,6 +191,8 @@ ActiveRecord::Schema.define(:version => 20121208180703) do
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end
+
+  add_index "user_types", ["name"], :name => "index_user_types_on_name", :unique => true
 
   create_table "users", :force => true do |t|
     t.string   "fio"

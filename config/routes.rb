@@ -1,5 +1,11 @@
 Cmis::Application.routes.draw do
 
+  resources :policies
+
+  resources :pacients
+
+  resources :groups
+
   resources :user_types
 
   resources :insurance_companies
