@@ -11,7 +11,11 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
+<<<<<<< HEAD
 ActiveRecord::Schema.define(:version => 20121216112506) do
+=======
+ActiveRecord::Schema.define(:version => 20121209015310) do
+>>>>>>> 680b2b14a6343a0c7c06ad385df250ed0e4e252a
 
   create_table "addresses", :force => true do |t|
     t.string   "country_id"
