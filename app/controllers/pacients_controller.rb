@@ -158,7 +158,7 @@ class PacientsController < ApplicationController
     @pacient.destroy
 
     respond_to do |format|
-      flash[:success] = "Пациент успешно удален."
+      flash[:success].now = "Пациент успешно удален."
       format.html { redirect_to pacients_url }
       format.json { head :no_content }
     end
