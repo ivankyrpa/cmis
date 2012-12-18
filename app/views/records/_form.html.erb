@@ -14,14 +14,14 @@
       <%= f.text_area :complaints, :class => 'text_area', :rows => '3' %>
     </div>
   </div>
-  <%- if @show_diagnosis_fields %>
+  <% if @show_diagnosis_fields %>
     <div class="control-group">
       <%= f.label "Диагноз", :class => 'control-label' %>
       <div class="controls">
         <%=f.select(:diagnosis_id, Diagnosis.find_all_by_user_type_id(current_user.user_type_id).collect {|p| [ p.name, p.id ] }) %>
       </div>
     </div>
-  <%- end %>
+  <% end %>
   <%= f.fields_for :assignments do |builder| %>
   <p>
     <%= builder.label :amount, "Назначение", :class => 'control-label' %>
