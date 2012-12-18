@@ -1,0 +1,27 @@
+<%- model_class = Record -%>
+<div class="page-header" align="center">
+  <h2>Медицинская карта</h2>
+</div>
+<h4><strong>Пациент: </strong><%= link_to "#{@pacient.lastname} #{@pacient.firstname} #{@pacient.middlename}",
+                                          pacient_path(@pacient)%></h4>
+<table class="table table-striped">
+  <thead>
+    <th><i class="icon-ok"></i></th>
+    <th>Запись</th>
+  </thead>
+  <tbody>
+    <% @pacient.records.each do |record| %>
+      <tr>
+        <td><%= check_box_tag "record_ids[]", record.id %></td>
+        <td><%= link_to record.date_accessed.to_s + "    " + Diagnosis.find(record.diagnosis_id).name, pacient_record_path(@pacient, record) %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<div class="form-actions">
+    <%= link_to "Добавить запись",
+                new_pacient_record_path(@pacient),
+                :class => 'btn btn-primary awhite' %>
+    <%= submit_tag "Удалить выбранное", :class => 'btn btn-danger awhite' %>
+</div>

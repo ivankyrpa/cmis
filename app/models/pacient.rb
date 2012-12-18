@@ -2,13 +2,14 @@
 class Pacient < ActiveRecord::Base
   has_one :address, :dependent => :destroy
   has_one :policy,  :dependent => :destroy
+  has_many :records, :dependent => :destroy
+  has_many :histories, :dependent => :destroy
   
   accepts_nested_attributes_for :address
   accepts_nested_attributes_for :policy
   
   lastname_regex = /[a-zA-Zа-яА-Я]+(-|)+[a-zA-Zа-яА-Я]\D/i
   name_regex = /[a-zA-Zа-яА-Я]\D/i
-  passport_regex = /\d/i
   
   validates :lastname, :presence => true,
                        :format   => lastname_regex

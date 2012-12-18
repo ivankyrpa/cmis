@@ -20,18 +20,14 @@ class PacientsController < ApplicationController
   def show
     @title = "Пациент"
     @pacient = Pacient.find(params[:id])
-    
-    if @pacient.address.country_id.nil? || @pacient.address.country_id == ""
-      @country = "----------"
-    else
-      @country = Country.find(@pacient.address.country_id).name
-    end
-    
-    if @pacient.address.region_id.nil? || @pacient.address.region_id == ""
-      @region = "----------"
-    else
-      @region = Region.find(@pacient.address.region_id).name
-    end
+
+    @pacient.address.country_id.nil? || @pacient.address.country_id == "" ?
+        @country = "----------" :
+        @country = Country.find(@pacient.address.country_id).name
+
+    @pacient.address.region_id.nil? || @pacient.address.region_id == "" ?
+        @region = "----------" :
+        @region = Region.find(@pacient.address.region_id).name
     
     if @pacient.address.city_id.nil? || @pacient.address.city_id == ""
       @city = "----------"

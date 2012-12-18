@@ -163,6 +163,14 @@
             end %>
       </div>
     </div>
+
+    <div align="center">
+      <h1><small>Документы</small></h1>
+      <%= link_to "Медицинская карта",
+                  pacient_records_path(@pacient), :class => 'btn btn-inverse awhite' %> <br/><br/>
+      <%= link_to "История болезни",
+                  pacient_histories_path(@pacient), :class => 'btn btn-info awhite' %>
+    </div>
   </div>
   
 </div>
@@ -204,4 +212,8 @@
               :data => { :confirm => "Вы уверены?",
                                   :title => "Подтверждение удаления"  },
               :class => 'btn btn-danger awhite' %>
+  <div class="pull-right">
+
+  </div>
+
 </div>

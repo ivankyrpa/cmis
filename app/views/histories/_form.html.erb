@@ -1,0 +1,61 @@
+<%= form_for [@pacient, @history], :html => { :class => 'form-horizontal' } do |f| %>
+    <div class="control-group">
+      <%= f.label "Номер", :class => 'control-label' %>
+      <div class="controls">
+        <%= f.text_field :number, :class => 'text_field' %>
+      </div>
+    </div>
+    <div class="control-group">
+      <%= f.label "Дата поступления", :class => 'control-label' %>
+      <div class="controls">
+        <div class="input-append date" id="dp2" data-date-format="yyyy-mm-dd">
+          <%= f.text_field :date_supply, :class => 'span2' %>
+          <span class="add-on"><i class="icon-th"></i></span>
+        </div>
+      </div>
+    </div>
+    <div class="control-group">
+      <%= f.label "Описание", :class => 'control-label' %>
+      <div class="controls">
+        <%= f.text_area :description, :class => 'text_area', :rows => '3' %>
+      </div>
+    </div>
+    <%- if @show_diagnosis_fields %>
+        <div class="control-group">
+          <%= f.label "Диагноз", :class => 'control-label' %>
+          <div class="controls">
+            <%=f.select(:diagnosis_id, Diagnosis.find_all_by_user_type_id(current_user.user_type_id).collect {|p| [ p.name, p.id ] }) %>
+          </div>
+        </div>
+    <%- end %>
+    <%= f.fields_for :assignments do |builder| %>
+        <p>
+          <%= builder.label :amount, "Назначение", :class => 'control-label' %>
+        <div class="controls">
+          <%= builder.select(:medicament_id, Medicament.all.collect {|p| [ p.name, p.id ] }) %>
+          <%= builder.number_field :amount, :class => 'number_field input-small', :placeholder => "Количество" %>
+        </div>
+        </p>
+    <% end %>
+    <div class="control-group">
+      <%= f.label "Тип лечения", :class => 'control-label' %>
+      <div class="controls">
+        <%=f.select(:treatment_type_id, TreatmentType.all.collect {|p| [ p.name, p.id ] }) %>
+      </div>
+    </div>
+    <div class="control-group">
+      <%= f.label "Дата выписки", :class => 'control-label' %>
+      <div class="controls">
+        <div class="input-append date" id="dp3" data-date-format="yyyy-mm-dd">
+          <%= f.text_field :date_extract, :class => 'span2' %>
+          <span class="add-on"><i class="icon-th"></i></span>
+        </div>
+      </div>
+    </div>
+
+    <div class="form-actions">
+      <%= f.submit "Сохранить", :class => 'btn btn-primary awhite' %>
+      <%= link_to "Отмена",
+                  pacient_histories_path(@pacient), :class => 'btn' %>
+    </div>
+<% end %>

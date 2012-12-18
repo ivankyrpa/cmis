@@ -1,0 +1,52 @@
+<%= form_for [@pacient, @record], :html => { :class => 'form-horizontal' } do |f| %>
+  <div class="control-group">
+    <%= f.label "Дата", :class => 'control-label' %>
+    <div class="controls">
+        <div class="input-append date" id="dp3" data-date-format="yyyy-mm-dd">
+          <%= f.text_field :date_accessed, :class => 'span2' %>
+          <span class="add-on"><i class="icon-th"></i></span>
+        </div>
+    </div>
+  </div>
+  <div class="control-group">
+    <%= f.label "Жалобы", :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_area :complaints, :class => 'text_area', :rows => '3' %>
+    </div>
+  </div>
+  <%- if @show_diagnosis_fields %>
+    <div class="control-group">
+      <%= f.label "Диагноз", :class => 'control-label' %>
+      <div class="controls">
+        <%=f.select(:diagnosis_id, Diagnosis.find_all_by_user_type_id(current_user.user_type_id).collect {|p| [ p.name, p.id ] }) %>
+      </div>
+    </div>
+  <%- end %>
+  <%= f.fields_for :assignments do |builder| %>
+  <p>
+    <%= builder.label :amount, "Назначение", :class => 'control-label' %>
+    <div class="controls">
+      <%= builder.select(:medicament_id, Medicament.all.collect {|p| [ p.name, p.id ] }) %>
+      <%= builder.number_field :amount, :class => 'number_field input-small', :placeholder => "Количество" %>
+    </div>
+  </p>
+  <% end %>
+  <div class="control-group">
+    <%= f.label "Рекомендация", :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_area :recommendation, :class => 'text_area', :rows => '3' %>
+    </div>
+  </div>
+  <div class="control-group">
+    <%= f.label "ФИО врача", :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :doctor_name, :class => 'text_field', :disabled => '' %>
+    </div>
+  </div>
+
+  <div class="form-actions">
+    <%= f.submit "Сохранить", :class => 'btn btn-primary awhite' %>
+    <%= link_to "Отмена",
+                pacient_records_path(@pacient), :class => 'btn' %>
+  </div>
+<% end %>

@@ -1,0 +1,32 @@
+<%= form_for @assignment, :html => { :class => 'form-horizontal' } do |f| %>
+  <div class="control-group">
+    <%= f.label :record_id, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.number_field :record_id, :class => 'number_field' %>
+    </div>
+  </div>
+  <div class="control-group">
+    <%= f.label :history_id, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.number_field :history_id, :class => 'number_field' %>
+    </div>
+  </div>
+  <div class="control-group">
+    <%= f.label :medicament_id, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.number_field :medicament_id, :class => 'number_field' %>
+    </div>
+  </div>
+  <div class="control-group">
+    <%= f.label :amount, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :amount, :class => 'text_field' %>
+    </div>
+  </div>
+
+  <div class="form-actions">
+    <%= f.submit nil, :class => 'btn btn-primary' %>
+    <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
+                assignments_path, :class => 'btn' %>
+  </div>
+<% end %>

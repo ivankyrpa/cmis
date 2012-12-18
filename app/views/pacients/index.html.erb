@@ -16,9 +16,9 @@
         <td><%= link_to "#{pacient.lastname} #{pacient.firstname[0]}.#{pacient.middlename[0]}.", pacient_path(pacient) %></td>
         <td>
           <%= link_to "Медицинская карта",
-                      "#", :class => 'btn btn-mini btn-inverse awhite' %>
+                      pacient_records_path(pacient), :class => 'btn btn-mini btn-inverse awhite' %>
           <%= link_to "История болезни",
-                      "#", :class => 'btn btn-mini btn-info awhite' %>
+                      pacient_histories_path(pacient), :class => 'btn btn-mini btn-info awhite' %>
         </td>
         <td>
           <%= link_to "Изменить",

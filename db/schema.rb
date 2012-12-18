@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121215083655) do
+ActiveRecord::Schema.define(:version => 20121218091731) do
 
   create_table "addresses", :force => true do |t|
     t.string   "country_id"
@@ -42,6 +42,15 @@ ActiveRecord::Schema.define(:version => 20121215083655) do
 
   add_index "analysis_types", ["name"], :name => "index_analysis_types_on_name", :unique => true
 
+  create_table "assignments", :force => true do |t|
+    t.integer  "record_id"
+    t.integer  "history_id"
+    t.integer  "medicament_id"
+    t.decimal  "amount"
+    t.datetime "created_at",    :null => false
+    t.datetime "updated_at",    :null => false
+  end
+
   create_table "blood_groups", :force => true do |t|
     t.string   "name"
     t.datetime "created_at", :null => false
@@ -68,9 +77,10 @@ ActiveRecord::Schema.define(:version => 20121215083655) do
 
   create_table "diagnoses", :force => true do |t|
     t.string   "name"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at",   :null => false
+    t.datetime "updated_at",   :null => false
     t.integer  "code"
+    t.integer  "user_type_id"
   end
 
   add_index "diagnoses", ["name"], :name => "index_diagnoses_on_name", :unique => true
@@ -88,6 +98,19 @@ ActiveRecord::Schema.define(:version => 20121215083655) do
     t.string   "name"
     t.datetime "created_at",   :null => false
     t.datetime "updated_at",   :null => false
+  end
+
+  create_table "histories", :force => true do |t|
+    t.integer  "pacient_id"
+    t.integer  "diagnosis_id"
+    t.integer  "treatment_type_id"
+    t.integer  "user_id"
+    t.string   "number"
+    t.date     "date_supply"
+    t.text     "description"
+    t.date     "date_extract"
+    t.datetime "created_at",        :null => false
+    t.datetime "updated_at",        :null => false
   end
 
   create_table "insurance_companies", :force => true do |t|
@@ -142,6 +165,18 @@ ActiveRecord::Schema.define(:version => 20121215083655) do
     t.integer  "pacient_id"
     t.datetime "created_at",           :null => false
     t.datetime "updated_at",           :null => false
+  end
+
+  create_table "records", :force => true do |t|
+    t.integer  "pacient_id"
+    t.integer  "assignment_id"
+    t.integer  "diagnosis_id"
+    t.date     "date_accessed"
+    t.text     "complaints"
+    t.text     "recommendation"
+    t.string   "doctor_name"
+    t.datetime "created_at",     :null => false
+    t.datetime "updated_at",     :null => false
   end
 
   create_table "regions", :force => true do |t|

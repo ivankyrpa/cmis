@@ -1,8 +1,13 @@
 Cmis::Application.routes.draw do
 
+  resources :assignments
+
   resources :policies
 
-  resources :pacients
+  resources :pacients do
+    resources :records
+    resources :histories
+  end
 
   resources :groups
 

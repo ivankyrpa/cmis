@@ -1,0 +1,31 @@
+<%- model_class = History -%>
+<div class="page-header" align="center">
+  <h2>Архив</h2>
+</div>
+<h4><strong>Пациент: </strong><%= link_to "#{@pacient.lastname} #{@pacient.firstname} #{@pacient.middlename}",
+                                          pacient_path(@pacient)%></h4>
+<table class="table table-striped">
+  <thead>
+      <th><i class="icon-ok"></i></th>
+      <th>История болезни №</th>
+      <th>Дата поступления</th>
+      <th>Дата выписки</th>
+  </thead>
+  <tbody>
+  <% @pacient.histories.each do |history| %>
+      <tr>
+        <td><%= check_box_tag "history_ids[]", history.id %></td>
+        <td><%= link_to history.number, pacient_history_path(@pacient, history), :class => 'btn'  %></td>
+        <td><%= history.date_supply %></td>
+        <td><%= history.date_extract %></td>
+      </tr>
+  <% end %>
+  </tbody>
+</table>
+
+<div class="form-actions">
+  <%= link_to "Новая история",
+              new_pacient_history_path(@pacient),
+              :class => 'btn btn-primary awhite' %>
+  <%= submit_tag "Удалить выбранное", :class => 'btn btn-danger awhite' %>
+</div>

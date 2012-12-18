@@ -7,6 +7,7 @@
     <tr>
       <th>Код</th>
       <th>Название</th>
+      <th>Специализация</th>
       <th>Действия</th>
     </tr>
   </thead>
@@ -14,7 +15,8 @@
     <% @diagnoses.each do |diagnosis| %>
       <tr>
         <td><%= diagnosis.code %></td>
-        <td><%= diagnosis.name %></td>
+        <td><%= diagnosis.name.length > 30 ? diagnosis.name[0, 27] + "..." : diagnosis.name %></td>
+        <td><%= UserType.find(diagnosis.user_type_id).name %></td>
         <td>
           <%= link_to "Изменить",
                       edit_diagnosis_path(diagnosis), :class => 'btn btn-mini' %>
