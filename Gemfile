@@ -6,7 +6,6 @@ gem 'rails', '3.2.2'
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 
 gem 'pg'
-gem 'jquery-rails'
 
 group :development do
   gem 'rspec-rails'
@@ -32,7 +31,8 @@ group :assets do
   gem 'uglifier', '>= 1.0.3'
 end
 
-gem 'bootstrap-datepicker-rails', '>= 0.6.21'
+gem 'jquery-rails'
+gem 'bootstrap-datepicker-rails'
 
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'

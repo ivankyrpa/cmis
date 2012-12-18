@@ -141,7 +141,7 @@ PLATFORMS
 
 DEPENDENCIES
   annotate (= 2.4.0)
-  bootstrap-datepicker-rails (>= 0.6.21)
+  bootstrap-datepicker-rails
   coffee-rails (~> 3.2.1)
   factory_girl_rails (= 1.0)
   jquery-rails
