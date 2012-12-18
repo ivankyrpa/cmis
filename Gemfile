@@ -31,7 +31,7 @@ group :assets do
   gem 'uglifier', '>= 1.0.3'
 end
 
-gem 'jquery-rails'
+gem 'jquery-rails', '>= 1.7.2'
 gem 'bootstrap-datepicker-rails', '>= 0.6.21'
 
 # To use ActiveModel has_secure_password
