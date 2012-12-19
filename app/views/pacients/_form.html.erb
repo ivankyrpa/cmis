@@ -43,7 +43,7 @@
         <div class="control-group">
           <h4>Дата рождения*</h4>
           <div class="controls">
-            <%= content_tag :div, :id => 'dp3', :data_date_format => 'yyyy-mm-dd', :class => 'input-append date' do -%>
+            <%= content_tag :div, :id => 'dp3', 'data-date-format' => 'yyyy-mm-dd', 'data-date' => :birthdate.to_s, :class => 'input-append date' do -%>
             <!--div class="input-append date" id="dp3" data-date-format="dd-mm-yyyy"-->
               <%= f.text_field :birthdate.to_s, :class => 'span6' %>
               <span class="add-on"><i class="icon-th"></i></span>
