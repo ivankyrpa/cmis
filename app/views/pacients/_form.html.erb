@@ -44,7 +44,7 @@
           <h4>Дата рождения*</h4>
           <div class="controls">
             <div class="input-append date" id="dp3" data-date-format="dd-mm-yyyy">
-              <%= f.text_field :birthdate, :class => 'span6' %>
+              <%= f.text_field :birthdate.to_s, :class => 'span6' %>
               <span class="add-on"><i class="icon-th"></i></span>
             </div>
           </div>
