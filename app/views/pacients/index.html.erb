@@ -2,38 +2,15 @@
 <div class="page-header">
   <h1>Пациенты</h1>
 </div>
-<table class="table table-striped">
-  <thead>
-    <tr>
-      <th>ФИО</th>
-      <th>Документы</th>
-      <th>Действия</th>
-    </tr>
-  </thead>
-  <tbody>
-    <% @pacients.each do |pacient| %>
-      <tr>
-        <td><%= link_to "#{pacient.lastname} #{pacient.firstname[0]}.#{pacient.middlename[0]}.", pacient_path(pacient) %></td>
-        <td>
-          <%= link_to "Медицинская карта",
-                      pacient_records_path(pacient), :class => 'btn btn-mini btn-inverse awhite' %>
-          <%= link_to "История болезни",
-                      pacient_histories_path(pacient), :class => 'btn btn-mini btn-info awhite' %>
-        </td>
-        <td>
-          <%= link_to "Изменить",
-                      edit_pacient_path(pacient), :class => 'btn btn-mini' %>
-          <%= link_to "Удалить",
-                      pacient_path(pacient),
-                      :method => :delete,
-                      :data => { :confirm => "Вы уверены?",
-                                  :title => "Подтверждение удаления"  },
-                      :class => 'btn btn-mini btn-danger awhite' %>
-        </td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+
+<%= form_tag pacients_path, :class => 'form-search', :method => 'get', :id => 'pacients_search' do %>
+  <div class="input-append pull-right">
+    <%= text_field_tag :search, params[:search], :placeholder => 'Введите фамилию...', :class => 'span2 search-query' %>
+    <%= submit_tag "Поиск", :name => nil, :class => 'btn' %>
+  </div>
+<% end %>
+
+<div id="pacients"><%= render 'pacients' %></div>
 
 <%= link_to "Новый...",
             new_pacient_path,

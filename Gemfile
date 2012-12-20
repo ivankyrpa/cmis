@@ -31,6 +31,7 @@ group :assets do
   gem 'uglifier', '>= 1.0.3'
 end
 
+gem "will_paginate", :git => "https://github.com/p7r/will_paginate.git", :branch => "rails3"
 gem 'jquery-rails'
 gem 'bootstrap-datepicker-rails'
 

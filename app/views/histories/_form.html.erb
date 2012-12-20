@@ -8,10 +8,10 @@
     <div class="control-group">
       <%= f.label "Дата поступления", :class => 'control-label' %>
       <div class="controls">
-        <div class="input-append date" id="dp2" data-date-format="yyyy-mm-dd">
-          <%= f.text_field :date_supply, :class => 'span2' %>
+        <%= content_tag :div, :id => 'dp2', 'data-date-format' => 'dd-mm-yyyy', 'data-date' => :date_supply, :class => 'input-append date' do -%>
+          <%= f.text_field :date_supply.to_s, :class => 'span2' %>
           <span class="add-on"><i class="icon-th"></i></span>
-        </div>
+        <%- end %>
       </div>
     </div>
     <div class="control-group">
@@ -46,10 +46,10 @@
     <div class="control-group">
       <%= f.label "Дата выписки", :class => 'control-label' %>
       <div class="controls">
-        <div class="input-append date" id="dp3" data-date-format="yyyy-mm-dd">
-          <%= f.text_field :date_extract, :class => 'span2' %>
+        <%= content_tag :div, :id => 'dp3', 'data-date-format' => 'dd-mm-yyyy', 'data-date' => :date_extract, :class => 'input-append date' do -%>
+          <%= f.text_field :date_extract.to_s, :class => 'span2' %>
           <span class="add-on"><i class="icon-th"></i></span>
-        </div>
+        <%- end %>
       </div>
     </div>
 

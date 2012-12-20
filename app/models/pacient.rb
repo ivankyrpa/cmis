@@ -21,6 +21,14 @@ class Pacient < ActiveRecord::Base
                          :format   => name_regex
   
   validates :passport_number, :presence => true,
-                              :uniqueness => { :scope=> :passport_seria}                   
+                              :uniqueness => { :scope=> :passport_seria}
+
+  def self.search(search)
+    if search
+      where('lastname LIKE ?', "%#{search}%")
+    else
+      scoped
+    end
+  end
 
 end

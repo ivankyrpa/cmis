@@ -2,10 +2,14 @@
   <div class="control-group">
     <%= f.label "Дата", :class => 'control-label' %>
     <div class="controls">
-        <div class="input-append date" id="dp3" data-date-format="yyyy-mm-dd">
-          <%= f.text_field :date_accessed, :class => 'span2' %>
+        <!--div class="input-append date" id="dp3" data-date-format="yyyy-mm-dd"-->
+          <!--%= f.text_field :date_accessed, :class => 'span2' %-->
+          <!--pan class="add-on"><i class="icon-th"></i></span>
+        </div-->
+        <%= content_tag :div, :id => 'dp3', 'data-date-format' => 'dd-mm-yyyy', 'data-date' => :date_accessed, :class => 'input-append date' do -%>
+          <%= f.text_field :date_accessed.to_s, :class => 'span2' %>
           <span class="add-on"><i class="icon-th"></i></span>
-        </div>
+        <%- end %>
     </div>
   </div>
   <div class="control-group">

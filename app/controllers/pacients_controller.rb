@@ -2,15 +2,18 @@
 class PacientsController < ApplicationController
     
   before_filter :user_authenticate
-  
+
+  helper_method :sort_column, :sort_direction
+
   # GET /pacients
   # GET /pacients.json
   def index
     @title = "Пациенты"
-    @pacients = Pacient.all
+    @pacients = Pacient.search(params[:search]).order(sort_column + " " + sort_direction).paginate(:per_page => 5, :page => params[:page])
 
     respond_to do |format|
       format.html # index.html.erb
+      format.js {}
       format.json { render json: @pacients }
     end
   end
@@ -165,5 +168,13 @@ class PacientsController < ApplicationController
       if admin? || !signed_in?
         deny_access
       end
+    end
+
+    def sort_column
+      Pacient.column_names.include?(params[:sort]) ? params[:sort] : "lastname"
+    end
+
+    def sort_direction
+      %w[asc desc].include?(params[:direction]) ? params[:direction] : "asc"
     end
 end
