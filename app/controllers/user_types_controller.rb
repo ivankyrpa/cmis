@@ -24,7 +24,7 @@ class UserTypesController < ApplicationController
 
   def new
     @title = "Добавление специализации"
-    @user_type = UserType.new
+    @user_type = UserType.new(:admin => false)
 
     respond_to do |format|
       if UserType.all.length < 3
