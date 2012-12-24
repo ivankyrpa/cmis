@@ -1,0 +1,28 @@
+<%- model_class = Characteristic -%>
+<div class="page-header">
+  <h1>Характеристика</h1>
+</div>
+
+<dl class="dl-horizontal">
+  <dt><strong>Группа:</strong></dt>
+  <dd><%= Group.find(@characteristic.group_id).name %></dd>
+  <dt><strong>Название:</strong></dt>
+  <dd><%= @characteristic.name %></dd>
+  <dt><strong><%= @first_val %>:</strong></dt>
+  <dd><%= @characteristic.first_value %></dd>
+  <dt><strong><%= @second_val %>:</strong></dt>
+  <dd><%= @characteristic.second_value %></dd>
+</dl>
+
+<div class="form-actions">
+  <%= link_to "Отмена",
+              characteristics_path, :class => 'btn'  %>
+  <%= link_to "Изменить",
+              edit_characteristic_path(@characteristic), :class => 'btn' %>
+  <%= link_to "Удалить",
+              characteristic_path(@characteristic),
+              :method => 'delete',
+              :data => { :confirm => "Вы уверены?",
+                         :title => "Подтверждение удаления"  },
+              :class => 'btn btn-danger awhite' %>
+</div>

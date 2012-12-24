@@ -1,3 +1,4 @@
+# coding: utf-8
 module SessionsHelper
   def sign_in(user)
     cookies.permanent.signed[:remember_token] = [user.id, user.salt]
@@ -17,7 +18,15 @@ module SessionsHelper
   end
   
   def admin?
-    signed_in? && (UserType.find(current_user.user_type_id).name == "admin")
+    signed_in? && UserType.find(current_user.user_type_id).admin
+  end
+
+  def lymph?
+    signed_in? && UserType.find(current_user.user_type_id).name == "лимфолог"
+  end
+
+  def phleb?
+    signed_in? && UserType.find(current_user.user_type_id).name == "флеболог"
   end
   
   def not_editable(user)

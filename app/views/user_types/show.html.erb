@@ -6,6 +6,12 @@
 <dl class="dl-horizontal">
   <dt><strong>Название:</strong></dt>
   <dd><%= @user_type.name %></dd>
+  <dt><strong>Администратор:</strong></dt>
+  <dd><%= if @user_type.admin
+            label_tag("Да")
+          else
+            label_tag("Heт")
+          end %></dd>
 </dl>
 
 <div class="form-actions">

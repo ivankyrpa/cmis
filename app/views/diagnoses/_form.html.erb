@@ -14,7 +14,7 @@
     <div class="control-group">
       <%= f.label "Специализация", :class => 'control-label' %>
       <div class="controls">
-        <%=f.select(:user_type_id, UserType.all.collect {|p| if p.name != "admin" then [ p.name, p.id ] end} ) %>
+        <%=f.select(:user_type_id, UserType.find_all_by_admin(false).collect {|p| [ p.name, p.id ] } ) %>
       </div>
     </div>
 

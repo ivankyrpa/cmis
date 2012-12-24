@@ -1,5 +1,11 @@
 Cmis::Application.routes.draw do
 
+  resources :l_recommendations
+
+  resources :f_recommendations
+
+  resources :characteristics
+
   resources :assignments
 
   resources :policies

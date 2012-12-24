@@ -47,14 +47,20 @@ class UserTypesController < ApplicationController
     @user_type = UserType.new(params[:user_type])
 
     respond_to do |format|
-      if @user_type.save
-        flash[:success] = "Специализация успешно добавлена."
-        format.html { redirect_to @user_type }
-        format.json { render json: @user_type, status: :created, location: @user_type }
-      else
-        flash.now[:error] = "Специализация с таким названием не может быть добавлена!"
+      if params[:user_type][:admin] == '1' && (UserType.find_all_by_admin(true).length == 0)
+        flash.now[:error] = "Специализация с правами администратора уже существует!"
         format.html { render action: "new" }
         format.json { render json: @user_type.errors, status: :unprocessable_entity }
+      else
+        if @user_type.save
+          flash[:success] = "Специализация успешно добавлена."
+          format.html { redirect_to @user_type }
+          format.json { render json: @user_type, status: :created, location: @user_type }
+        else
+          flash.now[:error] = "Специализация с таким названием не может быть добавлена!"
+          format.html { render action: "new" }
+          format.json { render json: @user_type.errors, status: :unprocessable_entity }
+        end
       end
     end
   end
@@ -63,26 +69,45 @@ class UserTypesController < ApplicationController
     @user_type = UserType.find(params[:id])
 
     respond_to do |format|
-      if @user_type.update_attributes(params[:user_type])
-        flash[:success] = "Специализация успешно отредактирована."
-        format.html { redirect_to @user_type }
-        format.json { head :no_content }
-      else
-        flash.now[:error] = "Введены неверные данные!"
+      if !@user_type.admin && params[:user_type][:admin] == '1' && (UserType.find_all_by_admin(true).length > 0)
+        flash.now[:error] = "Специализация с правами администратора уже существует!"
         format.html { render action: "edit" }
         format.json { render json: @user_type.errors, status: :unprocessable_entity }
+      else
+        if @user_type.admin && params[:user_type][:admin] == '0'
+          flash.now[:warning] = "Нельзя отобрать права администратора у этой специализации..."
+          format.html { render action: "edit" }
+          format.json { render json: @user_type.errors, status: :unprocessable_entity }
+        else
+          if @user_type.update_attributes(params[:user_type])
+            flash[:success] = "Специализация успешно отредактирована."
+            format.html { redirect_to @user_type }
+            format.json { head :no_content }
+          else
+            flash.now[:error] = "Введены неверные данные!"
+            format.html { render action: "edit" }
+            format.json { render json: @user_type.errors, status: :unprocessable_entity }
+          end
+        end
       end
     end
   end
 
   def destroy
     @user_type = UserType.find(params[:id])
-    @user_type.destroy
-
-    respond_to do |format|
-      flash[:success] = "Специализация успешно удалена."
-      format.html { redirect_to user_types_url }
-      format.json { head :no_content }
+    if @user_type.admin
+      respond_to do |format|
+        flash[:error] = "Специализация с правами администратора не может быть удалена!"
+        format.html { redirect_to user_types_url }
+        format.json { head :no_content }
+      end
+    else
+      @user_type.destroy
+      respond_to do |format|
+        flash[:success] = "Специализация успешно удалена."
+        format.html { redirect_to user_types_url }
+        format.json { head :no_content }
+      end
     end
   end
   

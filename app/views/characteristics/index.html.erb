@@ -1,0 +1,49 @@
+<%- model_class = Characteristic -%>
+<div class="page-header">
+  <h1>Список характеристик</h1>
+</div>
+
+<% @groups.each do |group| %>
+    <div class="group-header">
+      <h1><small><%= group.name %></small></h1>
+    </div>
+    <% if group.characteristics.length == 0 %>
+        <div align="center">
+          <h5>Характеристик нет...</h5>
+        </div>
+    <% else %>
+        <table class="table table-striped">
+          <thead>
+            <tr>
+              <th>Характеристика</th>
+              <th><%= @first_val %></th>
+              <th><%= @second_val %></th>
+              <th>Действия</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% group.characteristics.each do |characteristic| %>
+              <tr>
+                <td><%= characteristic.name %></td>
+                <td><%= characteristic.first_value %></td>
+                <td><%= characteristic.second_value %></td>
+                <td>
+                  <%= link_to "Изменить",
+                              edit_characteristic_path(characteristic), :class => 'btn btn-mini' %>
+                  <%= link_to "Удалить",
+                              characteristic_path(characteristic),
+                              :method => :delete,
+                              :data => { :confirm => "Вы уверены?",
+                                         :title => "Подтверждение удаления"  },
+                              :class => 'btn btn-mini btn-danger awhite' %>
+                </td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+      <% end %>
+<% end %>
+
+<%= link_to "Добавить",
+            new_characteristic_path,
+            :class => 'btn btn-primary awhite' %>

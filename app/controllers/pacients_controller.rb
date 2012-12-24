@@ -9,8 +9,9 @@ class PacientsController < ApplicationController
   # GET /pacients.json
   def index
     @title = "Пациенты"
-    @pacients = Pacient.search(params[:search]).order(sort_column + " " + sort_direction).paginate(:per_page => 5, :page => params[:page])
-
+    @pacients = Pacient.search(params[:search]).order(sort_column + " " + sort_direction)
+    #@pacients = Pacient.search(params[:search]).order(sort_column + " " + sort_direction).paginate(:per_page => 5, :page => params[:page])
+    #@pacients = Pacient.search_by_lastname(params[:lastn]).paginate(:per_page => 5, :page => params[:page])
     respond_to do |format|
       format.html # index.html.erb
       format.js {}

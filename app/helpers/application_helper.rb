@@ -16,4 +16,5 @@ module ApplicationHelper
     direction = column == sort_column && sort_direction == "asc" ? "desc" : "asc"
     link_to "#{title}       <i class='#{css_class} icon-black'></i>".html_safe, params.merge(:sort => column, :direction => direction, :page => nil)
   end
+
 end

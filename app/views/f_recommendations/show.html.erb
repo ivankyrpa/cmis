@@ -1,0 +1,31 @@
+<%- model_class = FRecommendation -%>
+<div class="page-header">
+  <h1><%=t '.title', :default => model_class.model_name.human %></h1>
+</div>
+
+<dl class="dl-horizontal">
+  <dt><strong><%= model_class.human_attribute_name(:group_id) %>:</strong></dt>
+  <dd><%= @f_recommendation.group_id %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:content) %>:</strong></dt>
+  <dd><%= @f_recommendation.content %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:low_c) %>:</strong></dt>
+  <dd><%= @f_recommendation.low_c %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:high_c) %>:</strong></dt>
+  <dd><%= @f_recommendation.high_c %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:low_dc) %>:</strong></dt>
+  <dd><%= @f_recommendation.low_dc %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:high_dc) %>:</strong></dt>
+  <dd><%= @f_recommendation.high_dc %></dd>
+</dl>
+
+<div class="form-actions">
+  <%= link_to t('.back', :default => t("helpers.links.back")),
+              f_recommendations_path, :class => 'btn'  %>
+  <%= link_to t('.edit', :default => t("helpers.links.edit")),
+              edit_f_recommendation_path(@f_recommendation), :class => 'btn' %>
+  <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
+              f_recommendation_path(@f_recommendation),
+              :method => 'delete',
+              :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
+              :class => 'btn btn-danger' %>
+</div>

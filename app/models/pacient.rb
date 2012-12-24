@@ -7,6 +7,11 @@ class Pacient < ActiveRecord::Base
   
   accepts_nested_attributes_for :address
   accepts_nested_attributes_for :policy
+
+  #scope :lastn, where('lastname LIKE ?', "%#{:lastn}%")
+  #scope :firstn, where('firstname LIKE ?', "%#{firstn}%")
+  #scope :middlen, where('middlename LIKE ?', "%#{middlen}%")
+  #scope :by_degree, proc { |degree| where(:degree => degree) }
   
   lastname_regex = /[a-zA-Zа-яА-Я]+(-|)+[a-zA-Zа-яА-Я]\D/i
   name_regex = /[a-zA-Zа-яА-Я]\D/i
@@ -26,6 +31,14 @@ class Pacient < ActiveRecord::Base
   def self.search(search)
     if search
       where('lastname LIKE ?', "%#{search}%")
+    else
+      scoped
+    end
+  end
+
+  def self.search_by_lastname(lastn)
+    if lastn
+      where('lastname LIKE ?', "%#{lastn}%")
     else
       scoped
     end

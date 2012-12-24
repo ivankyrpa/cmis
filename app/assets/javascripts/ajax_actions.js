@@ -8,3 +8,7 @@ $(function() {
         return false;
     });
 });
+
+$('#advanced').on('hidden', function () {
+    $(this).data('advanced').$element.cleanData();
+});

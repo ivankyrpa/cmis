@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121218091731) do
+ActiveRecord::Schema.define(:version => 20121224205135) do
 
   create_table "addresses", :force => true do |t|
     t.string   "country_id"
@@ -59,6 +59,15 @@ ActiveRecord::Schema.define(:version => 20121218091731) do
 
   add_index "blood_groups", ["name"], :name => "index_blood_groups_on_name", :unique => true
 
+  create_table "characteristics", :force => true do |t|
+    t.integer  "group_id"
+    t.string   "name"
+    t.float    "first_value"
+    t.float    "second_value"
+    t.datetime "created_at",   :null => false
+    t.datetime "updated_at",   :null => false
+  end
+
   create_table "cities", :force => true do |t|
     t.string   "name"
     t.datetime "created_at", :null => false
@@ -93,6 +102,17 @@ ActiveRecord::Schema.define(:version => 20121218091731) do
 
   add_index "districts", ["name"], :name => "index_districts_on_name", :unique => true
 
+  create_table "f_recommendations", :force => true do |t|
+    t.integer  "group_id"
+    t.string   "content"
+    t.decimal  "low_c"
+    t.decimal  "high_c"
+    t.decimal  "low_dc"
+    t.decimal  "high_dc"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
   create_table "groups", :force => true do |t|
     t.integer  "user_type_id"
     t.string   "name"
@@ -121,6 +141,18 @@ ActiveRecord::Schema.define(:version => 20121218091731) do
 
   create_table "insurance_types", :force => true do |t|
     t.string   "name"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  create_table "l_recommendations", :force => true do |t|
+    t.integer  "group_id"
+    t.text     "content_o"
+    t.text     "content_c"
+    t.text     "content_d"
+    t.integer  "low"
+    t.integer  "high"
+    t.integer  "min"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end
@@ -221,8 +253,9 @@ ActiveRecord::Schema.define(:version => 20121218091731) do
 
   create_table "user_types", :force => true do |t|
     t.string   "name"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at",                    :null => false
+    t.datetime "updated_at",                    :null => false
+    t.boolean  "admin",      :default => false
   end
 
   add_index "user_types", ["name"], :name => "index_user_types_on_name", :unique => true
