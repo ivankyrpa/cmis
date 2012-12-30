@@ -1,0 +1,32 @@
+<%= form_for :characteristics_surveys, :html => { :class => 'form-horizontal' } do |f| %>
+  <!--<div class="control-group">-->
+    <!--<%= f.label :survey_id, :class => 'control-label' %>-->
+    <!--<div class="controls">-->
+      <!--<%= f.select(:characteristic_id, Characteristic.all.collect {|p| [ p.name, p.id ] }) %>-->
+    <!--</div>-->
+  <!--</div>-->
+  <div class="control-group">
+    <%= f.label "Характеристика", :class => 'control-label' %>
+    <div class="controls">
+      <%= f.select(:characteristic_id, Characteristic.all.collect {|p| [ p.name, p.id ] }) %>
+    </div>
+  </div>
+  <div class="control-group">
+    <%= f.label :value, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :value, :class => 'text_field' %>
+    </div>
+  </div>
+  <div class="control-group">
+    <%= f.label :result, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.number_field :result, :class => 'number_field' %>
+    </div>
+  </div>
+
+  <div class="form-actions">
+    <%= f.submit nil, :class => 'btn btn-primary' %>
+    <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
+                characteristics_surveys_path, :class => 'btn' %>
+  </div>
+<% end %>

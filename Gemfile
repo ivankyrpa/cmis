@@ -34,6 +34,8 @@ end
 gem "will_paginate", :git => "https://github.com/p7r/will_paginate.git", :branch => "rails3"
 gem 'jquery-rails'
 gem 'bootstrap-datepicker-rails'
+gem 'jqplot-rails', :git => 'git://github.com/eightbitraptor/jqplot-rails.git'
+gem 'gon'
 
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'

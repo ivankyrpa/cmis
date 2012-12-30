@@ -1,5 +1,11 @@
 Cmis::Application.routes.draw do
 
+  
+
+  resources :surveys do
+    resources :characteristics_surveys
+  end
+
   resources :l_recommendations
 
   resources :f_recommendations

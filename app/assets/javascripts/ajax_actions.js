@@ -12,3 +12,7 @@ $(function() {
 $('#advanced').on('hidden', function () {
     $(this).data('advanced').$element.cleanData();
 });
+
+$("#closeAddChar").click(function () {
+           $("#addChar").modal("hide");
+});

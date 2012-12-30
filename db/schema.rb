@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121224205135) do
+ActiveRecord::Schema.define(:version => 20121227053506) do
 
   create_table "addresses", :force => true do |t|
     t.string   "country_id"
@@ -66,6 +66,15 @@ ActiveRecord::Schema.define(:version => 20121224205135) do
     t.float    "second_value"
     t.datetime "created_at",   :null => false
     t.datetime "updated_at",   :null => false
+  end
+
+  create_table "characteristics_surveys", :force => true do |t|
+    t.integer  "survey_id"
+    t.integer  "characteristic_id"
+    t.float    "value"
+    t.integer  "result"
+    t.datetime "created_at",        :null => false
+    t.datetime "updated_at",        :null => false
   end
 
   create_table "cities", :force => true do |t|
@@ -234,6 +243,13 @@ ActiveRecord::Schema.define(:version => 20121224205135) do
   end
 
   add_index "streets", ["name"], :name => "index_streets_on_name", :unique => true
+
+  create_table "surveys", :force => true do |t|
+    t.integer  "pacient_id"
+    t.date     "survey_date"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+  end
 
   create_table "symptoms", :force => true do |t|
     t.string   "name"

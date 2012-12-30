@@ -15,4 +15,6 @@
 //= require twitter/bootstrap
 //= require bootstrap-datepicker/core
 //= require_tree .
+//= require jqplot
+//= require jqplot/plugins/pieRenderer
 

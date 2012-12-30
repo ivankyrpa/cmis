@@ -1,0 +1,163 @@
+<%- model_class = Survey -%>
+<!--script type="text/javascript" charset="utf-8">
+  $(function() {
+    data = {"Bills & Utilities":1019.11,"Uncategorized":196.57,"Home":30.29,"Entertainment":300.0,"Food & Dining":465.45,"Personal Care":63.92,"Auto & Transport":571.44};
+
+jqData = []
+$.each(data, function(k,v){jqData.push([k,v]);});
+
+plot = jQuery.jqplot('chart1', [jqData],
+    {
+    title: ' ',
+    seriesDefaults: {
+        shadow: true,
+        renderer: jQuery.jqplot.PieRenderer,
+        rendererOptions: {
+            fill: false,
+            sliceMargin: 4,
+            showDataLabels: true
+            }
+    },
+    legend: { show:true }
+});
+</script-->
+
+<script type="text/javascript" charset="utf-8">
+  $(function() {
+      $("#btnResult").ready(function() {
+          Highcharts.getOptions().colors = $.map(Highcharts.getOptions().colors, function(color) {
+              return {
+                  radialGradient: { cx: 0.5, cy: 0.3, r: 0.7 },
+                  stops: [
+                      [0, color],
+                      [1, Highcharts.Color(color).brighten(-0.3).get('rgb')] // darken
+                  ]
+              };
+          });
+
+          // Build the chart
+          chart = new Highcharts.Chart({
+              chart: {
+                  renderTo: 'chart1',
+                  plotBackgroundColor: null,
+                  plotBorderWidth: null,
+                  plotShadow: false
+              },
+              title: {
+                  text: 'Результаты обследования'
+              },
+              tooltip: {
+                  pointFormat: '{series.name}: <b>{point.percentage}%</b>',
+                  percentageDecimals: 1
+              },
+              plotOptions: {
+                  pie: {
+                      allowPointSelect: true,
+                      cursor: 'pointer',
+                      dataLabels: {
+                          enabled: false
+                      },
+                      showInLegend: true
+                  }
+              },
+              series: [{
+                  type: 'pie',
+                  name: 'Тип лечения',
+                  data: [
+                      ['Оперативно', gon.oper],
+                      ['Консервативно', gon.cons],
+                      {
+                          name: 'Дообследование',
+                          y: gon.resur,
+                          sliced: true,
+                          selected: true
+                      }
+                  ]
+              }]
+          });
+      })
+
+  });
+</script>
+
+<div class="page-header">
+  <h2>Обследование от <%= @survey.survey_date.to_s%></h2>
+  <h3>Пациент: <%= Pacient.find(@survey.pacient_id).lastname %></h3>
+</div>
+
+<div id="addChar" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="addCharact" aria-hidden="true">
+  <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+    <h3>Добавление характеристики</h3>
+  </div>
+  <div class="modal-body">
+  </div>
+</div>
+
+<div id="resModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="result" aria-hidden="true">
+  <div class="modal-body">
+    <div id="chart1" style="width:470px; height:370px; margin: 15px;"></div>
+  </div>
+</div>
+
+<% @result_array.each do |gr| %>
+    <div class="group-header">
+      <h1><small><%= gr[0].name %></small></h1>
+    </div>
+
+    <table class="table table-striped">
+      <thead>
+      <tr>
+        <th>Характеристика</th>
+        <th>Значение</th>
+        <th>Результат</th>
+        <th>Действия</th>
+      </tr>
+      </thead>
+      <tbody>
+        <% gr[1].each do |characteristic| %>
+          <tr>
+            <td><%= Characteristic.find(characteristic.characteristic_id).name %></td>
+            <td><%= characteristic.value %></td>
+            <td><%= case characteristic.result
+                    when 1
+                      "Оперативно"
+                    when 2
+                      "Консервативно"
+                    else
+                      "Обследование"
+                    end %></td>
+            <td>
+              <!--a href="#addChar" role="button" data-toggle="modal" data-backdrop="true" class="btn" data-remote="<%= edit_survey_characteristics_survey_path(@survey, characteristic) %>">Изменть</a-->
+              <%= link_to "Удалить",
+                          survey_characteristics_survey_path(@survey, characteristic),
+                          :method => :delete,
+                          :data => { :confirm => "Вы уверены?",
+                                     :title => "Подтверждение удаления"  },
+                          :class => 'btn btn-mini btn-danger awhite' %>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+<% end %>
+
+<div class="btn-toolbar">
+<% if @characteristics_for_sur.length > @survey.characteristics_surveys.length %>
+    <a href="#addChar" role="button"
+       data-toggle="modal" data-backdrop="true"
+       class="btn btn-primary awhite" data-remote="<%= new_survey_characteristics_survey_path(@survey) %>">
+      Добавить характеристику
+    </a>
+
+<% end %>
+<% if @survey.characteristics_surveys.length != 0 %>
+
+  <a href="#resModal" role="button"
+     data-toggle="modal"
+     class="btn btn-warning awhite"
+     id="btnResult">
+    Результат обследования
+  </a>
+<% end %>
+</div>
