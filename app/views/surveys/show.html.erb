@@ -25,6 +25,10 @@ plot = jQuery.jqplot('chart1', [jqData],
 <script type="text/javascript" charset="utf-8">
   $(function() {
       $("#btnResult").ready(function() {
+          var o; var c; var r;
+          gon.oper != undefined ? o = gon.oper : o = 0 ;
+          gon.cons != undefined ? c = gon.cons : c = 0 ;
+          gon.resur != undefined ? r = gon.resur : r = 0 ;
           Highcharts.getOptions().colors = $.map(Highcharts.getOptions().colors, function(color) {
               return {
                   radialGradient: { cx: 0.5, cy: 0.3, r: 0.7 },
@@ -64,11 +68,11 @@ plot = jQuery.jqplot('chart1', [jqData],
                   type: 'pie',
                   name: 'Тип лечения',
                   data: [
-                      ['Оперативно', gon.oper],
-                      ['Консервативно', gon.cons],
+                      ['Оперативно', o],
+                      ['Консервативно', c],
                       {
                           name: 'Дообследование',
-                          y: gon.resur,
+                          y: r,
                           sliced: true,
                           selected: true
                       }
