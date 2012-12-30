@@ -90,7 +90,7 @@ class SurveysController < ApplicationController
   # GET /surveys/new.json
   def new
     @title = "Добавление обследования"
-    @survey = Survey.new
+    @survey = Survey.new(:survey_date => Date.today)
 
     respond_to do |format|
       format.html # new.html.erb
