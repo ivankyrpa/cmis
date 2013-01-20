@@ -27,20 +27,40 @@ class CharacteristicsSurveysController < ApplicationController
     @survey = Survey.find(params[:survey_id])
     groups = Group.find_all_by_user_type_id(current_user.user_type_id)
     @characteristics = []
-    groups.each do |group|
-      @characteristics += group.characteristics
-    end
-    ch_ids = @characteristics.map(&:id)
-    ch_sur_ids = @survey.characteristics_surveys.map(&:characteristic_id)
+    if lymph?
+      groups.each do |group|
+        @characteristics += group.characteristics
+      end
+      ch_ids = @characteristics.map(&:id)
+      ch_sur_ids = @survey.characteristics_surveys.map(&:characteristic_id)
 
-    all_characteristics = Characteristic.all
+      all_characteristics = Characteristic.all
 
-    ch_sur_ids.each do |ch_sur|
-      unless (ch_ids & [ch_sur]).empty?
-        @res = Characteristic.find(ch_sur)
-        @characteristics = @characteristics - [@res]
+      ch_sur_ids.each do |ch_sur|
+        unless (ch_ids & [ch_sur]).empty?
+          @res = Characteristic.find(ch_sur)
+          @characteristics = @characteristics - [@res]
+        end
+      end
+    else
+      if phleb?
+        groups.each do |group|
+          @characteristics += group.f_characteristics
+        end
+        ch_ids = @characteristics.map(&:id)
+        ch_sur_ids = @survey.characteristics_surveys.map(&:f_characteristic_id)
+
+        all_characteristics = FCharacteristic.all
+
+        ch_sur_ids.each do |ch_sur|
+          unless (ch_ids & [ch_sur]).empty?
+            @res = FCharacteristic.find(ch_sur)
+            @characteristics = @characteristics - [@res]
+          end
+        end
       end
     end
+    
     @characteristics_survey = CharacteristicsSurvey.new
     
     respond_to do |format|
@@ -51,23 +71,23 @@ class CharacteristicsSurveysController < ApplicationController
 
   # GET /characteristics_surveys/1/edit
   def edit
-    @survey = Survey.find(params[:survey_id])
-    groups = Group.find_all_by_user_type_id(current_user.user_type_id)
-    @characteristics = []
-    groups.each do |group|
-      @characteristics += group.characteristics
-    end
-    ch_ids = @characteristics.map(&:id)
-    ch_sur_ids = @survey.characteristics_surveys.map(&:characteristic_id)
+    #@survey = Survey.find(params[:survey_id])
+    #groups = Group.find_all_by_user_type_id(current_user.user_type_id)
+    #@characteristics = []
+    #groups.each do |group|
+    #  @characteristics += group.characteristics
+    #end
+    #ch_ids = @characteristics.map(&:id)
+    #ch_sur_ids = @survey.characteristics_surveys.map(&:characteristic_id)##
 
-    all_characteristics = Characteristic.all
+    #all_characteristics = Characteristic.all
 
-    ch_sur_ids.each do |ch_sur|
-      unless (ch_ids & [ch_sur]).empty?
-        res = all_characteristics.find(ch_sur.characteristic_id)
-        @characteristics = @characteristics - res
-      end
-    end
+    #ch_sur_ids.each do |ch_sur|
+    #  unless (ch_ids & [ch_sur]).empty?
+    #    res = all_characteristics.find(ch_sur.characteristic_id)
+    #    @characteristics = @characteristics - res
+    #  end
+    #end
 
     @characteristics_survey = CharacteristicsSurvey.find(params[:id])
     
@@ -80,23 +100,46 @@ class CharacteristicsSurveysController < ApplicationController
   # POST /characteristics_surveys.json
   def create
     @survey = Survey.find(params[:survey_id])
-    @charact = Characteristic.find(params[:characteristics_survey][:characteristic_id])
-    @value = params[:characteristics_survey][:value].to_f
-    if lymph?
+    if lymph? 
+      @charact = Characteristic.find(params[:characteristics_survey][:characteristic_id])
+      @value = params[:characteristics_survey][:value].to_f
+      
       value1 = @charact.first_value
       value2 = @charact.second_value
+      
+      if (@value < value1) || (@value > value2)
+       @result = 1
+      else
+       @result = 2
+      end
     else
-      value1 = @charact.first_value - @charact.second_value
-      value2 = @charact.first_value + @charact.second_value
+      if phleb?
+        @f_charact = FCharacteristic.find(params[:characteristics_survey][:f_characteristic_id])
+        @value = params[:characteristics_survey][:value].to_f
+        
+        n_c = @f_charact.norm_c
+        d_c = @f_charact.dev_c
+        n_sc = @f_charact.norm_sc
+        d_sc = @f_charact.dev_sc
+        n_dc = @f_charact.norm_dc
+        d_dc = @f_charact.dev_dc
+        
+        if (@value <= n_c + d_c) && (@value >= n_c - d_c)
+          @result = 1
+        else
+          if (@value <= n_sc + d_sc) && (@value >= n_sc - d_sc)
+            @result = 2
+          else
+            if (@value <= n_dc + d_dc) && (@value >= n_dc - d_dc)
+              @result = 3
+            end
+          end
+        end
+      end
     end
-    if (@value < value1) || (@value > value2)
-     @result = 1
-    else
-     @result = 2
-    end
+    
     @characteristics_survey = @survey.characteristics_surveys.build(params[:characteristics_survey])
     @characteristics_survey.result = @result
-    
     respond_to do |format|
       if @characteristics_survey.save
         format.html { redirect_to @survey }

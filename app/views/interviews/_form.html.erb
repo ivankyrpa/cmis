@@ -1,0 +1,23 @@
+<%= form_for @interview, :html => { :class => 'form-horizontal' } do |f| %>
+  <div class="control-group">
+    <%= f.label "Пациент", :class => 'control-label' %>
+    <div class="controls">
+      <%= f.select(:pacient_id, Pacient.all.collect {|p| [ p.lastname, p.id ] }) %>
+    </div>
+  </div>
+ <div class="control-group">
+    <%= f.label "Дата", :class => 'control-label' %>
+    <div class="controls">
+      <%= content_tag :div, :id => 'dp3', 'data-date-format' => 'dd-mm-yyyy', 'data-date' => :interview_date, :class => 'input-append date' do -%>
+          <%= f.text_field :interview_date.to_s, :class => 'span2' %>
+          <span class="add-on"><i class="icon-th"></i></span>
+      <%- end %>
+    </div>
+  </div>
+
+  <div class="form-actions">
+    <%= f.submit "Сохранить", :class => 'btn btn-primary awhite' %>
+    <%= link_to "Отмена",
+                interviews_path, :class => 'btn' %>
+  </div>
+<% end %>

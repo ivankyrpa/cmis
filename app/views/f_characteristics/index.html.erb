@@ -1,0 +1,56 @@
+<%- model_class = FCharacteristic -%>
+<div class="page-header">
+  <h1>Список характеристик</h1>
+</div>
+<% @groups.each do |group| %>
+    <div class="group-header">
+      <h1><small><%= group.name %></small></h1>
+    </div>
+    <% if group.f_characteristics.length == 0 %>
+        <div align="center">
+          <h5>Характеристик нет...</h5>
+        </div>
+    <% else %>
+        <table class="table table-condensed table-bordered">
+          <thead>
+            <tr>
+              <th>Характеристика</th>
+              <th>Норма</th>
+              <th>Отклонение</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+            <% group.f_characteristics.each do |characteristic| %>
+              <tr>
+                <td><%= characteristic.name %></td>
+                <td width="63"><%= characteristic.norm_c %></td>
+                <td width="110"><%= characteristic.dev_c %></td>
+                <td width="35" text-align="center">
+                  <%= link_to edit_f_characteristic_path(characteristic), :rel => "tooltip",
+                  'data-placement' => "top", 'data-original-title' => "Изменить", :class => "ablack" do -%>
+                    <i class="icon-pencil"></i>
+                  <%- end %>
+                  <%= link_to f_characteristic_path(characteristic),
+                              {:method => :delete,
+                              :data => { :confirm => "Вы уверены?",
+                                         :title => "Подтверждение удаления"}, :class => "ared" }, 
+                              {:rel => "tooltip",
+                              'data-placement' => "top", 
+                              'data-original-title' => "Удалить"} do -%>
+                    <i class="icon-remove"></i>
+                  <%- end %>
+                </td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+      <% end %>
+<% end %>
+
+<div class="form-actions">
+  <%= link_to new_f_characteristic_path,
+              :class => 'btn btn-primary awhite' do %>
+    <i class="icon-plus"></i> Добавить
+  <% end %>
+</div>            

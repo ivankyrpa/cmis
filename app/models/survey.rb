@@ -1,6 +1,12 @@
 class Survey < ActiveRecord::Base
   has_many :characteristics_surveys, :dependent => :destroy
-  #has_many :characteristics, :through => :characteristics_surveys
-
   accepts_nested_attributes_for :characteristics_surveys
+  
+  def self.search(search)
+    if search.nil? || search == ""
+      scoped
+    else
+      where('pacient_id = ?', "#{search}")
+    end
+  end
 end

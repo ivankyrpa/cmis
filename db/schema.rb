@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121227053506) do
+ActiveRecord::Schema.define(:version => 20130115105026) do
 
   create_table "addresses", :force => true do |t|
     t.string   "country_id"
@@ -41,6 +41,14 @@ ActiveRecord::Schema.define(:version => 20121227053506) do
   end
 
   add_index "analysis_types", ["name"], :name => "index_analysis_types_on_name", :unique => true
+
+  create_table "answers", :force => true do |t|
+    t.integer  "interview_id"
+    t.integer  "question_id"
+    t.integer  "rating"
+    t.datetime "created_at",   :null => false
+    t.datetime "updated_at",   :null => false
+  end
 
   create_table "assignments", :force => true do |t|
     t.integer  "record_id"
@@ -73,8 +81,9 @@ ActiveRecord::Schema.define(:version => 20121227053506) do
     t.integer  "characteristic_id"
     t.float    "value"
     t.integer  "result"
-    t.datetime "created_at",        :null => false
-    t.datetime "updated_at",        :null => false
+    t.datetime "created_at",          :null => false
+    t.datetime "updated_at",          :null => false
+    t.integer  "f_characteristic_id"
   end
 
   create_table "cities", :force => true do |t|
@@ -111,13 +120,26 @@ ActiveRecord::Schema.define(:version => 20121227053506) do
 
   add_index "districts", ["name"], :name => "index_districts_on_name", :unique => true
 
+  create_table "f_characteristics", :force => true do |t|
+    t.integer  "group_id"
+    t.string   "name"
+    t.float    "norm_c"
+    t.float    "norm_sc"
+    t.float    "norm_dc"
+    t.float    "dev_c"
+    t.float    "dev_sc"
+    t.float    "dev_dc"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
   create_table "f_recommendations", :force => true do |t|
     t.integer  "group_id"
     t.string   "content"
-    t.decimal  "low_c"
-    t.decimal  "high_c"
-    t.decimal  "low_dc"
-    t.decimal  "high_dc"
+    t.integer  "low_c"
+    t.integer  "high_c"
+    t.integer  "low_dc"
+    t.integer  "high_dc"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end
@@ -152,6 +174,13 @@ ActiveRecord::Schema.define(:version => 20121227053506) do
     t.string   "name"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
+  end
+
+  create_table "interviews", :force => true do |t|
+    t.integer  "pacient_id"
+    t.date     "interview_date"
+    t.datetime "created_at",     :null => false
+    t.datetime "updated_at",     :null => false
   end
 
   create_table "l_recommendations", :force => true do |t|
@@ -208,6 +237,13 @@ ActiveRecord::Schema.define(:version => 20121227053506) do
     t.datetime "updated_at",           :null => false
   end
 
+  create_table "questions", :force => true do |t|
+    t.integer  "section_id"
+    t.text     "content"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
   create_table "records", :force => true do |t|
     t.integer  "pacient_id"
     t.integer  "assignment_id"
@@ -227,6 +263,12 @@ ActiveRecord::Schema.define(:version => 20121227053506) do
   end
 
   add_index "regions", ["name"], :name => "index_regions_on_name", :unique => true
+
+  create_table "sections", :force => true do |t|
+    t.string   "name"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
 
   create_table "settlements", :force => true do |t|
     t.string   "name"

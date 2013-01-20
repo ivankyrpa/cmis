@@ -1,0 +1,60 @@
+<%= form_for @f_characteristic, :html => { :class => 'form-horizontal' } do |f| %>
+  <div class="control-group">
+    <%= f.label "Группа характеристик", :class => 'control-label' %>
+    <div class="controls">
+      <%=f.select(:group_id, Group.find_all_by_user_type_id(current_user.user_type_id).collect {|p| [ p.name, p.id ] }) %>
+    </div>
+  </div>
+  <div class="control-group">
+    <%= f.label "Название", :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :name, :class => 'text_field' %>
+    </div>
+  </div>
+  <h2><small>Компенцсация</small></h2>
+  <div class="control-group">
+    <%= f.label "Норма", :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :norm_c, :class => 'text_field' %>
+    </div>
+  </div>
+  <div class="control-group">
+    <%= f.label "Отклонение", :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :dev_c, :class => 'text_field' %>
+    </div>
+  </div>
+  <h2><small>Субкомпенцсация</small></h2>
+  <div class="control-group">
+    <%= f.label "Норма", :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :norm_sc, :class => 'text_field' %>
+    </div>
+  </div>
+  <div class="control-group">
+    <%= f.label "Отклонение", :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :dev_sc, :class => 'text_field' %>
+    </div>
+  </div>
+  
+  <h2><small>Декомпенцсация</small></h2>
+  <div class="control-group">
+    <%= f.label "Норма", :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :norm_dc, :class => 'text_field' %>
+    </div>
+  </div>
+  <div class="control-group">
+    <%= f.label "Отклонение", :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :dev_dc, :class => 'text_field' %>
+    </div>
+  </div>
+
+  <div class="form-actions">
+    <%= f.submit "Сохранить", :class => 'btn btn-primary awhite' %>
+    <%= link_to "Отмена",
+                f_characteristics_path, :class => 'btn' %>
+  </div>
+<% end %>

@@ -98,4 +98,19 @@ class RecordsController < ApplicationController
       format.json { head :no_content }
     end
   end
+  
+  def delete_multiple
+    @pacient = Pacient.find(params[:pacient_id])
+    if params[:record_ids]
+      @records = @pacient.records.find(params[:record_ids])
+      @records.each do |record|
+        record.destroy
+      end
+    end
+    
+    respond_to do |format|
+      format.html { redirect_to pacient_records_url }
+      format.json { head :no_content }
+    end
+  end
 end

@@ -9,9 +9,11 @@ class PacientsController < ApplicationController
   # GET /pacients.json
   def index
     @title = "Пациенты"
-    @pacients = Pacient.search(params[:search]).order(sort_column + " " + sort_direction)
+    #@pacients = Pacient.search(params[:search]).order(sort_column + " " + sort_direction)
     #@pacients = Pacient.search(params[:search]).order(sort_column + " " + sort_direction).paginate(:per_page => 5, :page => params[:page])
-    #@pacients = Pacient.search_by_lastname(params[:lastn]).paginate(:per_page => 5, :page => params[:page])
+    @pacients = Pacient.joins(:address).by_country(params[:country]).by_region(params[:region]).by_city(params[:city]).by_settlement(params[:settlement]).by_district(params[:district]).by_street(params[:street]).by_house(params[:house]).by_flat(params[:flat]).firstn(params[:firstn]).middlen(params[:middlen]).lastn(params[:lastn]).by_sex(params[:sex]).by_diagnosis(params[:diagnosis]).order(sort_column + " " + sort_direction)
+    
+    @pacients = @pacients.search(params[:search]).order(sort_column + " " + sort_direction)
     respond_to do |format|
       format.html # index.html.erb
       format.js {}

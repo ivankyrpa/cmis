@@ -1,48 +1,56 @@
 <%- model_class = LRecommendation -%>
 <div class="page-header">
-  <h1><%=t '.title', :default => model_class.model_name.human.pluralize %></h1>
+  <h1>Рекомендации</h1>
 </div>
-<table class="table table-striped">
-  <thead>
-    <tr>
-      <th><%= model_class.human_attribute_name(:id) %></th>
-      <th><%= model_class.human_attribute_name(:group_id) %></th>
-      <th><%= model_class.human_attribute_name(:content_o) %></th>
-      <th><%= model_class.human_attribute_name(:content_c) %></th>
-      <th><%= model_class.human_attribute_name(:content_d) %></th>
-      <th><%= model_class.human_attribute_name(:low) %></th>
-      <th><%= model_class.human_attribute_name(:high) %></th>
-      <th><%= model_class.human_attribute_name(:min) %></th>
-      <th><%= model_class.human_attribute_name(:created_at) %></th>
-      <th><%=t '.actions', :default => t("helpers.actions") %></th>
-    </tr>
-  </thead>
-  <tbody>
-    <% @l_recommendations.each do |l_recommendation| %>
+
+<% @groups.each do |group| %>
+  <div class="group-header">
+    <h1><small><%= group.name %></small></h1>
+  </div>
+  <% if group.l_recommendations.length != 0 %> 
+    <table class="table table-striped">
       <tr>
-        <td><%= link_to l_recommendation.id, l_recommendation_path(l_recommendation) %></td>
-        <td><%= l_recommendation.group_id %></td>
-        <td><%= l_recommendation.content_o %></td>
-        <td><%= l_recommendation.content_c %></td>
-        <td><%= l_recommendation.content_d %></td>
-        <td><%= l_recommendation.low %></td>
-        <td><%= l_recommendation.high %></td>
-        <td><%= l_recommendation.min %></td>
-        <td><%=l l_recommendation.created_at %></td>
-        <td>
-          <%= link_to t('.edit', :default => t("helpers.links.edit")),
-                      edit_l_recommendation_path(l_recommendation), :class => 'btn btn-mini' %>
-          <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
-                      l_recommendation_path(l_recommendation),
-                      :method => :delete,
-                      :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
-                      :class => 'btn btn-mini btn-danger' %>
+        <td><p><strong>Текст в случае оперативного лечения</strong></p></td>
+        <td><%= group.l_recommendations.first.content_o %></td>
+      </tr>
+      <tr>
+        <td><p><strong>Текст в случае консервативного лечения</strong></p></td>
+        <td><%= group.l_recommendations.first.content_c %></td>
+      </tr>
+      <tr>
+        <td><p><strong>Текст в случае дообследования</strong></p></td>
+        <td><%= group.l_recommendations.first.content_d %></td>
+      </tr>
+      <tr>
+        <td><p><strong>Диапазон оперативных показателей, ведущих к дообследованию</strong></p></td>
+        <td><%= "#{group.l_recommendations.first.low}% -  #{group.l_recommendations.first.high}%" %></td>
+      </tr>
+      <tr>
+        <td><p><strong>Миниммальное количество параметров</strong></p></td>
+        <td><%= "#{group.l_recommendations.first.min}%" %></td>
+      </tr>
+      <tr>
+        <td></td>
+        <td align="center">
+          <%= link_to "Изменить",
+              edit_l_recommendation_path(group.l_recommendations.first),
+              :class => 'btn' %>
+          <%= link_to "Удалить",
+              l_recommendation_path(group.l_recommendations.first),
+              :method => 'delete',
+              :data => { :confirm => "Вы уверены?",
+                                  :title => "Подтверждение удаления"  },
+              :class => 'btn btn-danger awhite' %>
         </td>
       </tr>
-    <% end %>
-  </tbody>
-</table>
+    </table>  
+  <% else %>
+    <p><strong>Рекомендации не добавлены</strong></p><br/>
+  <% end %>
+<% end %>
 
-<%= link_to t('.new', :default => t("helpers.links.new")),
-            new_l_recommendation_path,
-            :class => 'btn btn-primary' %>
+<% if @l_recommendations.length < @groups.length  %>
+  <%= link_to "Добавить рекомендацию",
+              new_l_recommendation_path,
+              :class => 'btn btn-primary awhite' %>
+<% end %>

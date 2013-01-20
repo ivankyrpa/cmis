@@ -54,7 +54,7 @@
     </div>  
     <div class="row-fluid cell-border">
       <div class="span6 dcenter">
-        <strong>Паспорт:</strong>
+        <strong>Паспорт</strong>
       </div>
       <div class="span6">
         <p><strong>Серия:</strong><%= @pacient.passport_seria %></p>
@@ -167,53 +167,27 @@
     <div align="center">
       <h1><small>Документы</small></h1>
       <%= link_to "Медицинская карта",
-                  pacient_records_path(@pacient), :class => 'btn btn-inverse awhite' %> <br/><br/>
+                  pacient_records_path(@pacient), :class => 'btn btn-block' %>
       <%= link_to "История болезни",
-                  pacient_histories_path(@pacient), :class => 'btn btn-info awhite' %>
+                  pacient_histories_path(@pacient), :class => 'btn btn-block btn-info awhite' %>
     </div>
   </div>
   
 </div>
 
-
-
-<!--dl class="dl-horizontal">
-  <dt><h2><small>ФИО:</small></h2></dt>
-  <dd><%= @pacient.lastname %></dd>
-  <dt><strong><%= model_class.human_attribute_name(:middlename) %>:</strong></dt>
-  <dd><%= @pacient.middlename %></dd>
-  <dt><strong><%= model_class.human_attribute_name(:firstname) %>:</strong></dt>
-  <dd><%= @pacient.firstname %></dd>
-  <dt><strong><%= model_class.human_attribute_name(:birthdate) %>:</strong></dt>
-  <dd><%= @pacient.birthdate %></dd>
-  <dt><strong><%= model_class.human_attribute_name(:sex) %>:</strong></dt>
-  <dd><%= @pacient.sex %></dd>
-  <dt><strong><%= model_class.human_attribute_name(:phone) %>:</strong></dt>
-  <dd><%= @pacient.phone %></dd>
-  <dt><strong><%= model_class.human_attribute_name(:age_group_id) %>:</strong></dt>
-  <dd><%= @pacient.age_group_id %></dd>
-  <dt><strong><%= model_class.human_attribute_name(:blood_group_id) %>:</strong></dt>
-  <dd><%= @pacient.blood_group_id %></dd>
-</dl>
-
-<div >
-  <p><h3>ФИО:<small><%= "#{@pacient.lastname} #{@pacient.firstname} #{@pacient.middlename}" %></small></h3></p></br>
-  <p><strong>Дата рождения:</strong><%= @pacient.birthdate %></p></br>
-</div-->
-
 <div class="form-actions">
-  <%= link_to "Отмена",
-              pacients_path, :class => 'btn'  %>
-  <%= link_to "Изменить",
-              edit_pacient_path(@pacient), :class => 'btn' %>
-  <%= link_to "Удалить",
-              pacient_path(@pacient),
+  <%= link_to pacients_path, :class => 'btn' do%>
+    <i class="icon-ban-circle"></i>  Отмена
+  <% end %>
+  <%= link_to edit_pacient_path(@pacient), :class => 'btn'  do%>
+    <i class="icon-edit"></i>  Изменить
+  <% end %>
+  <%= link_to pacient_path(@pacient),
               :method => 'delete',
               :data => { :confirm => "Вы уверены?",
                                   :title => "Подтверждение удаления"  },
-              :class => 'btn btn-danger awhite' %>
-  <div class="pull-right">
-
-  </div>
+              :class => 'btn btn-danger awhite'  do%>
+    <i class="icon-trash"></i>  Удалить
+  <% end %>
 
 </div>

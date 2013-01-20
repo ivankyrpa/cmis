@@ -1,31 +1,32 @@
 <%- model_class = FRecommendation -%>
 <div class="page-header">
-  <h1><%=t '.title', :default => model_class.model_name.human %></h1>
+  <h1>Рекомендация</h1>
 </div>
 
 <dl class="dl-horizontal">
-  <dt><strong><%= model_class.human_attribute_name(:group_id) %>:</strong></dt>
+  <dt><strong>Группа:</strong></dt>
   <dd><%= @f_recommendation.group_id %></dd>
-  <dt><strong><%= model_class.human_attribute_name(:content) %>:</strong></dt>
+  <dt><strong>Текст рекомендации:</strong></dt>
   <dd><%= @f_recommendation.content %></dd>
-  <dt><strong><%= model_class.human_attribute_name(:low_c) %>:</strong></dt>
+  <dt><strong>От(К):</strong></dt>
   <dd><%= @f_recommendation.low_c %></dd>
-  <dt><strong><%= model_class.human_attribute_name(:high_c) %>:</strong></dt>
+  <dt><strong>До(К):</strong></dt>
   <dd><%= @f_recommendation.high_c %></dd>
-  <dt><strong><%= model_class.human_attribute_name(:low_dc) %>:</strong></dt>
+  <dt><strong>От(ДК):</strong></dt>
   <dd><%= @f_recommendation.low_dc %></dd>
-  <dt><strong><%= model_class.human_attribute_name(:high_dc) %>:</strong></dt>
+  <dt><strong>До(ДК):</strong></dt>
   <dd><%= @f_recommendation.high_dc %></dd>
 </dl>
 
 <div class="form-actions">
-  <%= link_to t('.back', :default => t("helpers.links.back")),
+  <%= link_to "Отмена",
               f_recommendations_path, :class => 'btn'  %>
-  <%= link_to t('.edit', :default => t("helpers.links.edit")),
+  <%= link_to "Изменить",
               edit_f_recommendation_path(@f_recommendation), :class => 'btn' %>
-  <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
+  <%= link_to "Удалить",
               f_recommendation_path(@f_recommendation),
               :method => 'delete',
-              :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
-              :class => 'btn btn-danger' %>
+              :data => { :confirm => "Вы уверены?",
+                                  :title => "Подтверждение удаления"  },
+              :class => 'btn btn-danger awhite' %> 
 </div>

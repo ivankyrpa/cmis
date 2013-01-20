@@ -1,0 +1,38 @@
+<%- model_class = Section -%>
+<div class="page-header">
+  <h1>Разделы</h1>
+</div>
+<table class="table table-condensed table-striped">
+  <thead>
+    <tr>
+      <th>Название</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @sections.each do |section| %>
+      <tr>
+        <td><%= section.name %></td>
+          <td width="35">
+            <%= link_to edit_section_path(section), :rel => "tooltip",
+              'data-placement' => "top", 'data-original-title' => "Изменить", :class => "ablack" do -%>
+              <i class="icon-pencil"></i>
+            <%- end %>
+            <%= link_to section_path(section),
+                        {:method => :delete,
+                        :data => { :confirm => "Вы уверены?",
+                                   :title => "Подтверждение удаления"}, :class => "ared" }, 
+                        {:rel => "tooltip",
+                        'data-placement' => "top", 
+                        'data-original-title' => "Удалить"} do -%>
+              <i class="icon-remove"></i>
+            <%- end %>
+          </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<%= link_to "Новый...",
+            new_section_path,
+            :class => 'btn btn-primary awhite' %>

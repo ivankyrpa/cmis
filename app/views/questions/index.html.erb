@@ -1,0 +1,51 @@
+<%- model_class = Question -%>
+<div class="page-header">
+  <h1>Список вопросов</h1>
+</div>
+            
+<% @sections.each do |section| %>
+    <div class="group-header">
+      <h1><small><%= section.name %></small></h1>
+    </div>
+    <% if section.questions.length == 0 %>
+        <div align="center">
+          <h5>Вопросов нет...</h5>
+        </div>
+    <% else %>
+        <table class="table table-condensed table-bordered">
+          <thead>
+            <tr>
+              <th>Текст вопроса</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+            <% section.questions.each do |question| %>
+              <tr>
+                <td><%= question.content %></td>
+                <td width="35">
+                  <%= link_to edit_question_path(question), :rel => "tooltip",
+                    'data-placement' => "top", 'data-original-title' => "Изменить", :class => "ablack" do -%>
+                    <i class="icon-pencil"></i>
+                  <%- end %>
+                  <%= link_to question_path(question),
+                              {:method => :delete,
+                              :data => { :confirm => "Вы уверены?",
+                                         :title => "Подтверждение удаления"}, :class => "ared" }, 
+                              {:rel => "tooltip",
+                              'data-placement' => "top", 
+                              'data-original-title' => "Удалить"} do -%>
+                    <i class="icon-remove"></i>
+                  <%- end %>
+                </td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+      <% end %>
+<% end %>
+
+<%= link_to "Добавить",
+            new_question_path,
+            :class => 'btn btn-primary awhite' %>            
+

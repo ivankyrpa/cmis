@@ -33,7 +33,7 @@ class UsersController < ApplicationController
   def create
     @user = User.new(params[:user])
     if @user.save
-      flash[:success] = "Пользователь успешно добавлен."
+      flash[:success] = "Пользователь успешно добавлен"
       redirect_to users_path
     else
       flash.now[:error] = "Введены неверные данные."

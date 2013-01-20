@@ -4,6 +4,8 @@
 </div>
 <h4><strong>Пациент: </strong><%= link_to "#{@pacient.lastname} #{@pacient.firstname} #{@pacient.middlename}",
                                           pacient_path(@pacient)%></h4>
+<%= form_tag delete_multiple_pacient_histories_path(@pacient), :method => :delete, :id => "delete_form" do %>
+<% if @pacient.histories.length != 0 %>
 <table class="table table-striped">
   <thead>
       <th><i class="icon-ok"></i></th>
@@ -16,16 +18,24 @@
       <tr>
         <td><%= check_box_tag "history_ids[]", history.id %></td>
         <td><%= link_to history.number, pacient_history_path(@pacient, history), :class => 'btn'  %></td>
-        <td><%= history.date_supply %></td>
-        <td><%= history.date_extract %></td>
+        <td width="160"><%= history.date_supply %></td>
+        <td width="150"><%= history.date_extract %></td>
       </tr>
   <% end %>
   </tbody>
 </table>
-
+<% else %>
+  <div align="center">
+    <h2><small>Историй болезни не найдено...</small></h2>
+  </div>
+<% end %>
 <div class="form-actions">
-  <%= link_to "Новая история",
-              new_pacient_history_path(@pacient),
-              :class => 'btn btn-primary awhite' %>
-  <%= submit_tag "Удалить выбранное", :class => 'btn btn-danger awhite' %>
+  <%= link_to new_pacient_history_path(@pacient),
+              :class => 'btn btn-primary awhite' do %>
+    <i class='icon-plus'></i> Новая история
+  <% end %>
+  <% if @pacient.histories.length != 0 %>
+    <%= link_to_submit "Удалить выбранное" %>
+  <% end %>
+<% end %>
 </div>

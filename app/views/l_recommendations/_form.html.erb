@@ -1,50 +1,50 @@
 <%= form_for @l_recommendation, :html => { :class => 'form-horizontal' } do |f| %>
   <div class="control-group">
-    <%= f.label :group_id, :class => 'control-label' %>
+    <%= f.label "Группа характеристик", :class => 'control-label' %>
     <div class="controls">
-      <%= f.number_field :group_id, :class => 'number_field' %>
+      <%=f.select(:group_id, Group.find_all_by_user_type_id(current_user.user_type_id).collect {|p| [ p.name, p.id ] }) %>
     </div>
   </div>
   <div class="control-group">
-    <%= f.label :content_o, :class => 'control-label' %>
+    <%= f.label "Текст при оперативном лечении:", :class => 'control-label' %>
     <div class="controls">
-      <%= f.text_area :content_o, :class => 'text_area' %>
+      <%= f.text_area :content_o, :class => 'text_area', :rows => '3' %>
     </div>
   </div>
   <div class="control-group">
-    <%= f.label :content_c, :class => 'control-label' %>
+    <%= f.label "Текст при консервативном лечении:", :class => 'control-label' %>
     <div class="controls">
-      <%= f.text_area :content_c, :class => 'text_area' %>
+      <%= f.text_area :content_c, :class => 'text_area', :rows => '3' %>
     </div>
   </div>
   <div class="control-group">
-    <%= f.label :content_d, :class => 'control-label' %>
+    <%= f.label "Текст при дообследовании:", :class => 'control-label' %>
     <div class="controls">
-      <%= f.text_area :content_d, :class => 'text_area' %>
+      <%= f.text_area :content_d, :class => 'text_area', :rows => '3' %>
     </div>
   </div>
   <div class="control-group">
-    <%= f.label :low, :class => 'control-label' %>
+    <%= f.label "Нижняя граница диапазона дообследования, %", :class => 'control-label' %>
     <div class="controls">
       <%= f.number_field :low, :class => 'number_field' %>
     </div>
   </div>
   <div class="control-group">
-    <%= f.label :high, :class => 'control-label' %>
+    <%= f.label "Верхняя граница диапазона дообследования, %", :class => 'control-label' %>
     <div class="controls">
       <%= f.number_field :high, :class => 'number_field' %>
     </div>
   </div>
   <div class="control-group">
-    <%= f.label :min, :class => 'control-label' %>
+    <%= f.label "Минимальное количнсвто параметров", :class => 'control-label' %>
     <div class="controls">
       <%= f.number_field :min, :class => 'number_field' %>
     </div>
   </div>
 
   <div class="form-actions">
-    <%= f.submit nil, :class => 'btn btn-primary' %>
-    <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
+    <%= f.submit "Сохранить", :class => 'btn btn-primary' %>
+    <%= link_to "Отмена",
                 l_recommendations_path, :class => 'btn' %>
   </div>
 <% end %>

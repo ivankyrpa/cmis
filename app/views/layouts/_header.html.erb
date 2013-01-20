@@ -43,7 +43,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                   </a>
-                  <a class="brand" href="#">Комплексная МИС</a>
+                  <a class="brand" href="<%= root_url %>"><i class="icon-home"></i>   Комплексная МИС</a>
                   <% if signed_in? %>
                   <div class="nav-collapse collapse navbar-inverse-collapse">
                     <% if admin? %>
@@ -69,16 +69,38 @@
                       <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">Обследования <b class="caret"></b></a>
                       <ul class="dropdown-menu" >
-                        <li><%= link_to "Характеристики", characteristics_path %></li>
-                        <li><%= link_to "Рекомендации", "#" %></li>
+                        <% if lymph? %>
+                          <li><%= link_to "Характеристики", characteristics_path %></li>
+                        <% else %>
+                          <li><%= link_to "Характеристики", f_characteristics_path %></li>
+                        <% end %>
+                        <% if lymph? %>
+                          <li><%= link_to "Рекомендации", l_recommendations_path %></li>
+                        <% else %>
+                          <li><%= link_to "Рекомендации", f_recommendations_path %></li>
+                        <% end %>
                         <li class="divider"></li>
                         <li><%= link_to "Результаты обследований", surveys_path %></li>
+                      </ul>
+                      
+                      <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Опросы <b class="caret"></b></a>
+                      <ul class="dropdown-menu" >
+                        <li class="dropdown-submenu">
+                                <a tabindex="-1" href="#">Работа с вопросами</a>
+                                <ul class="dropdown-menu">
+                                  <li><%= link_to "Разделы", sections_path, :tabindex => -1 %></li>
+                                  <li><%= link_to "Список вопросов", questions_path, :tabindex => -1 %></li>
+                                </ul>
+                              </li>
+                        <li class="divider"></li>
+                        <li><%= link_to "Опросные листы", interviews_path %></li>
                       </ul>
                     </ul>  
                     <% end %>
                     <ul class="nav pull-right">
                       <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Помощь <b class="caret"></b></a>
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="icon-question-sign"></i>   Помощь <b class="caret"></b></a>
                         <ul class="dropdown-menu">
                           <li><%= link_to contacts_path do%>
                                 <i class="icon-envelope"></i>   Контакты
@@ -91,7 +113,9 @@
                         </ul>
                       </li>
                       <li class="divider-vertical"></li>
-                      <li><%= link_to "Выход", logout_path, :method => :delete %></li>
+                      <li><%= link_to logout_path, :method => :delete do%>
+                            <i class="icon-off"></i>   Выход
+                          <% end %></li>
                     </ul>
                   </div><!-- /.nav-collapse -->
                   <% end %>

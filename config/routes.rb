@@ -1,14 +1,18 @@
 Cmis::Application.routes.draw do
 
-  
+  resources :interviews do
+    resources :answers 
+  end
+
+  resources :questions
+
+  resources :sections
+
+  resources :f_characteristics
 
   resources :surveys do
     resources :characteristics_surveys
   end
-
-  resources :l_recommendations
-
-  resources :f_recommendations
 
   resources :characteristics
 
@@ -17,10 +21,22 @@ Cmis::Application.routes.draw do
   resources :policies
 
   resources :pacients do
-    resources :records
-    resources :histories
+    resources :records do
+      collection do
+        delete :delete_multiple
+      end
+    end 
+    resources :histories do
+      collection do
+        delete :delete_multiple
+      end
+    end  
   end
 
+  resources :l_recommendations
+  
+  resources :f_recommendations
+  
   resources :groups
 
   resources :user_types
@@ -73,8 +89,6 @@ Cmis::Application.routes.draw do
   match '/dictionaries', :to => 'pages#dictionaries'
   
   root :to => "pages#welcome"
-  
-  
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

@@ -1,0 +1,22 @@
+<%- model_class = Interview -%>
+            
+<div class="row-fluid">
+ <div class="span3 page-header">
+  <h3>Пациенты</h3>
+ </div>
+ <div class="span4" style="margin-top: 35px;">
+  <%= form_tag interviews_path, :method => 'get', :id => 'interviews_search', :class => 'form-search' do %>
+    <%= select_tag :search, options_from_collection_for_select(@pacients, "id", :fio), :id => "sp", :prompt => "Все" %>
+  <% end %>
+ </div>
+</div>
+
+<div id="interviews"><%= render 'interviews' %></div>
+
+<div class="form-actions">
+  <%= link_to new_interview_path,
+              :class => 'btn btn-primary awhite' do %>
+    <i class="icon-plus"></i> Добавить опросной лист
+  <% end %>
+</div>
+

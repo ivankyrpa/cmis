@@ -97,4 +97,19 @@ class HistoriesController < ApplicationController
       format.json { head :no_content }
     end
   end
+  
+  def delete_multiple
+    @pacient = Pacient.find(params[:pacient_id])
+    if params[:history_ids]
+      @histories = @pacient.histories.find(params[:history_ids])
+      @histories.each do |history|
+        history.destroy
+      end
+    end
+    
+    respond_to do |format|
+      format.html { redirect_to pacient_histories_url }
+      format.json { head :no_content }
+    end
+  end
 end

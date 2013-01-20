@@ -17,7 +17,13 @@ class SessionsController < ApplicationController
       render 'new'
     else
       sign_in user
-      redirect_to user
+      if lymph? || phleb?
+        redirect_to pacients_url
+      else
+        if admin?
+          redirect_to user
+        end
+      end
     end
   end
 

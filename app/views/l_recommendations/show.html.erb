@@ -1,33 +1,34 @@
 <%- model_class = LRecommendation -%>
 <div class="page-header">
-  <h1><%=t '.title', :default => model_class.model_name.human %></h1>
+  <h1>Рекомендация</h1>
 </div>
 
 <dl class="dl-horizontal">
-  <dt><strong><%= model_class.human_attribute_name(:group_id) %>:</strong></dt>
-  <dd><%= @l_recommendation.group_id %></dd>
-  <dt><strong><%= model_class.human_attribute_name(:content_o) %>:</strong></dt>
+  <dt><strong>Группа:</strong></dt>
+  <dd><%= Group.find(@l_recommendation.group_id).name %></dd>
+  <dt><strong>При оперативном лечении:</strong></dt>
   <dd><%= @l_recommendation.content_o %></dd>
-  <dt><strong><%= model_class.human_attribute_name(:content_c) %>:</strong></dt>
+  <dt><strong>При консервативном лечении:</strong></dt>
   <dd><%= @l_recommendation.content_c %></dd>
-  <dt><strong><%= model_class.human_attribute_name(:content_d) %>:</strong></dt>
+  <dt><strong>При дообследовании:</strong></dt>
   <dd><%= @l_recommendation.content_d %></dd>
-  <dt><strong><%= model_class.human_attribute_name(:low) %>:</strong></dt>
-  <dd><%= @l_recommendation.low %></dd>
-  <dt><strong><%= model_class.human_attribute_name(:high) %>:</strong></dt>
-  <dd><%= @l_recommendation.high %></dd>
-  <dt><strong><%= model_class.human_attribute_name(:min) %>:</strong></dt>
-  <dd><%= @l_recommendation.min %></dd>
+  <dt><strong>Нижняя граница диапазона дообследования:</strong></dt>
+  <dd><%= @l_recommendation.low %>%</dd>
+  <dt><strong>Верхняя граница диапазона дообследования:</strong></dt>
+  <dd><%= @l_recommendation.high %>%</dd>
+  <dt><strong>Минимальное число параметров:</strong></dt>
+  <dd><%= @l_recommendation.min %>%</dd>
 </dl>
 
 <div class="form-actions">
-  <%= link_to t('.back', :default => t("helpers.links.back")),
+  <%= link_to "Отмена",
               l_recommendations_path, :class => 'btn'  %>
-  <%= link_to t('.edit', :default => t("helpers.links.edit")),
+  <%= link_to "Изменить",
               edit_l_recommendation_path(@l_recommendation), :class => 'btn' %>
-  <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
+  <%= link_to "Удалить",
               l_recommendation_path(@l_recommendation),
               :method => 'delete',
-              :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
-              :class => 'btn btn-danger' %>
+              :data => { :confirm => "Вы уверены?",
+                                  :title => "Подтверждение удаления"  },
+              :class => 'btn btn-danger awhite' %> 
 </div>

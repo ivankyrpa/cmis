@@ -1,0 +1,88 @@
+<%- model_class = Interview -%>
+
+<div id="addQ" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="addQuestion" aria-hidden="true">
+  <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+    <h3>Добавление вопроса</h3>
+  </div>
+  <div class="modal-body">
+  </div>
+</div>
+
+<div id="editQ" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="editQuestion" aria-hidden="true">
+  <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+    <h3>Ответ на вопрос</h3>
+  </div>
+  <div class="modal-body">
+  </div>
+</div>
+
+<div class="page-header">
+  <h1>Опросной лист</h1>
+</div>
+<div class="row-fluid">
+  <div class="span6">
+    <h4><%= "#{Pacient.find(@interview.pacient_id).lastname} #{Pacient.find(@interview.pacient_id).firstname[0]}. #{Pacient.find(@interview.pacient_id).middlename[0]}." %></h4>
+  </div>
+  <div class="span6">
+    <div class="pull-right">
+      <h4><%= @interview.interview_date.to_s%></h4>
+    </div>
+  </div>
+</div><br/>
+
+<% @result_array.each do |sec| %>
+    <table class="table table-condensed table-bordered">
+      <thead>
+      <tr>
+        <th><%= sec[0].name %></th>
+        <th>Оценка</th>
+        <th></th>
+      </tr>
+      </thead>
+      <tbody>
+        <% sec[1].each do |answer| %>
+          <tr>
+            <td><%= Question.find(answer.question_id).content %></td>
+            <% if answer.rating.nil? %>
+              <td width="135">
+                <a href="#editQ" role="button"
+                   data-toggle="modal" data-backdrop="true"
+                   data-remote="<%= edit_interview_answer_path(@interview, answer) %>">
+                                      Ответить
+                </a>
+              </td>
+            <% else %>
+              <td width="135"><%= answer.rating %></td>
+            <% end %>
+            <td width="20">
+              <%= link_to interview_answer_path(@interview, answer),
+                          {:method => :delete,
+                          :data => { :confirm => "Вы уверены?",
+                                     :title => "Подтверждение удаления"}, :class => "ared" }, 
+                          {:rel => "tooltip",
+                          'data-placement' => "top", 
+                          'data-original-title' => "Удалить"} do -%>
+                <i class="icon-remove"></i>
+              <%- end %>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+    <div class="pull-right">
+      <p><b>Сумма по разделу: </b><%= sec[2] %></p>
+    </div>
+<br/><br/><br/>
+<% end %>
+
+<div class="form-actions">
+  <% if Question.all.length > @interview.answers.length %>
+      <a href="#addQ" role="button"
+         data-toggle="modal" data-backdrop="true"
+         class="btn btn-primary awhite" data-remote="<%= new_interview_answer_path(@interview) %>">
+        <i class="icon-plus"></i> Добавить вопрос
+      </a>
+  <% end %>
+</div>

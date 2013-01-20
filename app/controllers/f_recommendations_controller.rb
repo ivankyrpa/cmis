@@ -3,6 +3,7 @@ class FRecommendationsController < ApplicationController
   # GET /f_recommendations.json
   def index
     @f_recommendations = FRecommendation.all
+    @groups = Group.find_all_by_user_type_id(current_user.user_type_id)
 
     respond_to do |format|
       format.html # index.html.erb
@@ -44,7 +45,7 @@ class FRecommendationsController < ApplicationController
 
     respond_to do |format|
       if @f_recommendation.save
-        format.html { redirect_to @f_recommendation, notice: 'F recommendation was successfully created.' }
+        format.html { redirect_to f_recommendations_url }
         format.json { render json: @f_recommendation, status: :created, location: @f_recommendation }
       else
         format.html { render action: "new" }
@@ -60,7 +61,7 @@ class FRecommendationsController < ApplicationController
 
     respond_to do |format|
       if @f_recommendation.update_attributes(params[:f_recommendation])
-        format.html { redirect_to @f_recommendation, notice: 'F recommendation was successfully updated.' }
+        format.html { redirect_to f_recommendations_url }
         format.json { head :no_content }
       else
         format.html { render action: "edit" }

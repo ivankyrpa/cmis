@@ -1,0 +1,32 @@
+<% if @interviews.length != 0 %>
+<table class="table table-bordered">
+  <thead>
+    <tr>
+      <th>Опросные листы</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @interviews.each do |interview| %>
+      <tr>
+        <td><%= link_to "#{Pacient.find(interview.pacient_id).lastname} #{Pacient.find(interview.pacient_id).firstname[0]}.#{Pacient.find(interview.pacient_id).middlename[0]}.       #{interview.interview_date}", interview_path(interview) %></td>
+        <td width="20">
+          <%= link_to interview_path(interview),
+                  {:method => :delete,
+                  :data => { :confirm => "Вы уверены?",
+                             :title => "Подтверждение удаления"}, :class => "ared" }, 
+                  {:rel => "tooltip",
+                  'data-placement' => "top", 
+                  'data-original-title' => "Удалить"} do -%>
+            <i class="icon-remove"></i>
+          <%- end %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+<% else %>
+  <div align="center">
+    <h2><small>Опросных листов  не найдено...</small></h2>
+  </div>
+<% end %>

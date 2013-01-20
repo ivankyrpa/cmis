@@ -6,9 +6,6 @@ class CharacteristicsController < ApplicationController
     @title = "Характеристики"
     @user_type = UserType.find(current_user.user_type_id)
 
-    @user_type.name == "лимфолог" ?  @first_val = "От" : @first_val = "Норма"
-    @user_type.name == "лимфолог" ?  @second_val = "До" : @second_val = "Отклонение"
-
     @groups = @user_type.groups
 
     respond_to do |format|
@@ -22,9 +19,6 @@ class CharacteristicsController < ApplicationController
   def show
     @title = "Характеристика"
     @user_type = UserType.find(current_user.user_type_id)
-
-    @user_type.name == "лимфолог" ?  @first_val = "От" : @first_val = "Норма"
-    @user_type.name == "лимфолог" ?  @second_val = "До" : @second_val = "Отклонение"
 
     @characteristic = Characteristic.find(params[:id])
 
@@ -40,9 +34,6 @@ class CharacteristicsController < ApplicationController
     @title = "Добавление характеристики"
     @user_type = UserType.find(current_user.user_type_id)
 
-    @user_type.name == "лимфолог" ?  @first_val = "От" : @first_val = "Норма"
-    @user_type.name == "лимфолог" ?  @second_val = "До" : @second_val = "Отклонение"
-
     @characteristic = Characteristic.new
 
     respond_to do |format|
@@ -55,9 +46,6 @@ class CharacteristicsController < ApplicationController
   def edit
     @title = "Редактирование характеристики"
     @user_type = UserType.find(current_user.user_type_id)
-
-    @user_type.name == "лимфолог" ?  @first_val = "От" : @first_val = "Норма"
-    @user_type.name == "лимфолог" ?  @second_val = "До" : @second_val = "Отклонение"
 
     @characteristic = Characteristic.find(params[:id])
   end

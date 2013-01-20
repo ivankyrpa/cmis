@@ -1,0 +1,33 @@
+<% if @surveys.length != 0 %>
+<table class="table table-bordered">
+  <thead>
+    <tr>
+      <th>Обследования</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @surveys.each do |survey| %>
+      <tr>
+        <td><%= link_to "#{Pacient.find(survey.pacient_id).lastname} #{Pacient.find(survey.pacient_id).firstname[0]}.#{Pacient.find(survey.pacient_id).middlename[0]}.      #{survey.survey_date}", survey_path(survey) %></td>
+        <td width="20">
+          <%= link_to survey_path(survey),
+                  {:method => :delete,
+                  :data => { :confirm => "Вы уверены?",
+                             :title => "Подтверждение удаления"}, :class => "ared" }, 
+                  {:rel => "tooltip",
+                  'data-placement' => "top", 
+                  'data-original-title' => "Удалить"} do -%>
+            <i class="icon-remove"></i>
+          <%- end %>
+        </td>
+        
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+<% else %>
+  <div align="center">
+    <h2><small>Обследований не найдено...</small></h2>
+  </div>
+<% end %>

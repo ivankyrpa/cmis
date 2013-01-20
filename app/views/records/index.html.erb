@@ -4,6 +4,7 @@
 </div>
 <h4><strong>Пациент: </strong><%= link_to "#{@pacient.lastname} #{@pacient.firstname} #{@pacient.middlename}",
                                           pacient_path(@pacient)%></h4>
+<%= form_tag delete_multiple_pacient_records_path(@pacient), :method => :delete, :id => "delete_form" do %>                                          
 <table class="table table-striped">
   <thead>
     <th><i class="icon-ok"></i></th>
@@ -20,8 +21,12 @@
 </table>
 
 <div class="form-actions">
-    <%= link_to "Добавить запись",
-                new_pacient_record_path(@pacient),
-                :class => 'btn btn-primary awhite' %>
-    <%= submit_tag "Удалить выбранное", :class => 'btn btn-danger awhite' %>
+  <%= link_to new_pacient_record_path(@pacient),
+              :class => 'btn btn-primary awhite' do %>
+    <i class='icon-plus'></i> Новая история
+  <% end %>
+  <% if @pacient.records.length != 0 %>
+    <%= link_to_submit "Удалить выбранное" %>
+  <% end %>
+<% end %>
 </div>

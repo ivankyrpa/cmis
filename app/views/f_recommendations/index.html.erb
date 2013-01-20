@@ -1,46 +1,52 @@
 <%- model_class = FRecommendation -%>
 <div class="page-header">
-  <h1><%=t '.title', :default => model_class.model_name.human.pluralize %></h1>
+  <h1>Рекомендации</h1>
 </div>
-<table class="table table-striped">
-  <thead>
-    <tr>
-      <th><%= model_class.human_attribute_name(:id) %></th>
-      <th><%= model_class.human_attribute_name(:group_id) %></th>
-      <th><%= model_class.human_attribute_name(:content) %></th>
-      <th><%= model_class.human_attribute_name(:low_c) %></th>
-      <th><%= model_class.human_attribute_name(:high_c) %></th>
-      <th><%= model_class.human_attribute_name(:low_dc) %></th>
-      <th><%= model_class.human_attribute_name(:high_dc) %></th>
-      <th><%= model_class.human_attribute_name(:created_at) %></th>
-      <th><%=t '.actions', :default => t("helpers.actions") %></th>
-    </tr>
-  </thead>
-  <tbody>
-    <% @f_recommendations.each do |f_recommendation| %>
-      <tr>
-        <td><%= link_to f_recommendation.id, f_recommendation_path(f_recommendation) %></td>
-        <td><%= f_recommendation.group_id %></td>
-        <td><%= f_recommendation.content %></td>
-        <td><%= f_recommendation.low_c %></td>
-        <td><%= f_recommendation.high_c %></td>
-        <td><%= f_recommendation.low_dc %></td>
-        <td><%= f_recommendation.high_dc %></td>
-        <td><%=l f_recommendation.created_at %></td>
-        <td>
-          <%= link_to t('.edit', :default => t("helpers.links.edit")),
-                      edit_f_recommendation_path(f_recommendation), :class => 'btn btn-mini' %>
-          <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
-                      f_recommendation_path(f_recommendation),
-                      :method => :delete,
-                      :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
-                      :class => 'btn btn-mini btn-danger' %>
-        </td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
 
-<%= link_to t('.new', :default => t("helpers.links.new")),
-            new_f_recommendation_path,
-            :class => 'btn btn-primary' %>
+<% @groups.each do |group| %>
+  <div class="group-header">
+    <h1><small><%= group.name %></small></h1>
+  </div>
+  <% if group.f_recommendations.length != 0 %> 
+    <% group.f_recommendations.each do |recom| %> 
+      <table class="table table-striped">
+        <tr align="center">
+          <td><p><strong>Текст рекомендации</strong></p></td>
+          <td width="50"><p><strong>От(К)</strong></p></td>
+          <td width="50"><p><strong>До(К)</strong></p></td>
+          <td width="50"><p><strong>От(ДК)</strong></p></td>
+          <td width="50"><p><strong>До(ДК)</strong></p></td>
+        </tr>
+        <tr>
+          <td><%= recom.content %></td>
+          <td><%= recom.low_c %></td>
+          <td><%= recom.high_c %></td>
+          <td><%= recom.low_dc %></td>
+          <td><%= recom.high_dc %></td>
+        </tr>
+        <tr>
+          <td>
+              <%= link_to "Изменить",
+                  edit_f_recommendation_path(recom),
+                  :class => 'btn btn-mini' %>
+              <%= link_to "Удалить",
+                  f_recommendation_path(recom),
+                  :method => 'delete',
+                  :data => { :confirm => "Вы уверены?",
+                                      :title => "Подтверждение удаления"  },
+                  :class => 'btn btn-mini btn-danger awhite' %>
+          </td>
+        </tr>
+      </table>  
+    <% end %>
+  <% else %>
+    <p><strong>Рекомендации не добавлены</strong></p><br/>
+  <% end %>
+<% end %>
+
+<div class="form-actions">
+  <%= link_to new_f_recommendation_path,
+              :class => 'btn btn-primary awhite' do %>
+    <i class="icon-plus"></i> Добавить
+  <% end %>
+</div>              

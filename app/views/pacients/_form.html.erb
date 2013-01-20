@@ -1,185 +1,204 @@
 <%= form_for @pacient do |f| %>
-  <div class="group_box round" >
-    <div align="center" class="label_box">
-      <h3>Личные данные</h3>
+  <div class="accordion" id="accordion2">
+  <div class="accordion-group">
+    <div class="accordion-heading">
+      <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseOne">
+        Личные данные
+      </a>
     </div>
-    <div class="row-fluid">
-      <div class="span6">
-        <div class="control-group ">
-          <h4>Фамилия*</h4>
-          <div class="controls">
-            <%= f.text_field :lastname, :class => 'text_field input-medium', :placeholder => "Фамилия" %>
-          </div>
-        </div>
-        <div class="control-group">
-          <h4>Имя*</h4>
-          <div class="controls">
-            <%= f.text_field :firstname, :class => 'text_field input-medium', :placeholder => "Имя" %>
-          </div>
-        </div>
-        <div class="control-group">
-          <h4>Отчество*</h4>
-          <div class="controls">
-            <%= f.text_field :middlename, :class => 'text_field input-medium', :placeholder => "Отчество" %>
-          </div>
-        </div>
-        <div class="control-group">
-          <h4>Паспорт*</h4>
-          <div class="span4">
-            <%= f.label "Серия*", :class => 'control-label' %>
-            <div class="controls">
-              <%= f.text_field :passport_seria, :class => 'text_field input-mini', :placeholder => "Серия", :maxlength => 4 %>
+    <div id="collapseOne" class="accordion-body collapse in">
+      <div class="accordion-inner">
+        <div class="row-fluid">
+          <div class="span6">
+            <div class="control-group ">
+              <h4>Фамилия*</h4>
+              <div class="controls">
+                <%= f.text_field :lastname, :class => 'text_field input-medium', :placeholder => "Фамилия", 'required' => "" %>
+              </div>
+            </div>
+            <div class="control-group">
+              <h4>Имя*</h4>
+              <div class="controls">
+                <%= f.text_field :firstname, :class => 'text_field input-medium', :placeholder => "Имя" %>
+              </div>
+            </div>
+            <div class="control-group">
+              <h4>Отчество*</h4>
+              <div class="controls">
+                <%= f.text_field :middlename, :class => 'text_field input-medium', :placeholder => "Отчество" %>
+              </div>
+            </div>
+            <div class="control-group">
+              <h4>Паспорт*</h4>
+              <div class="span4">
+                <%= f.label "Серия*", :class => 'control-label' %>
+                <div class="controls">
+                  <%= f.text_field :passport_seria, :class => 'text_field input-mini', :placeholder => "Серия", :maxlength => 4 %>
+                </div>
+              </div>
+              <div class="span4">
+                <%= f.label "Номер*", :class => 'control-label' %>
+                <div class="controls">
+                  <%= f.text_field :passport_number, :class => 'text_field input-small', :placeholder => "Номер", :maxlength => 6 %>
+                </div>
+              </div>
             </div>
           </div>
-          <div class="span4">
-            <%= f.label "Номер*", :class => 'control-label' %>
-            <div class="controls">
-              <%= f.text_field :passport_number, :class => 'text_field input-small', :placeholder => "Номер", :maxlength => 6 %>
+          <div class="span6">
+            <div class="control-group">
+              <h4>Дата рождения*</h4>
+              <div class="controls">
+                <%= content_tag :div, :id => 'dp3', 'data-date-format' => 'dd-mm-yyyy', 'data-date' => :birthdate.to_s, :class => 'input-append date' do -%>
+                  <%= f.text_field :birthdate.to_s, :class => 'span6' %>
+                  <span class="add-on"><i class="icon-th"></i></span>
+                <%- end %>
+                <!--%= f.text_field :birthdate.to_s, :id => 'dp2', :class => 'span6'  %-->
+              </div>
             </div>
+            <div class="control-group">
+              <h4>Пол*</h4>
+              <div class="controls">
+                <label class="radio">
+                  <%= f.radio_button :sex, true %>
+                              мужской
+                </label>
+                <label class="radio">
+                  <%= f.radio_button :sex, false %>
+                              женский
+                </label>  
+              </div>        
+            </div>
+            <div class="control-group">
+              <h4>Возрастная группа</h4>
+              <div class="controls">
+                <%=f.select(:age_group_id, AgeGroup.all.collect {|p| [ (p.from.to_s + '...' + p.to.to_s), p.id ] }) %>
+              </div>
+            </div>
+            <div class="control-group">
+              <h4>Группа крови</h4>
+              <div class="controls">
+                <%=f.select(:blood_group_id, BloodGroup.all.collect {|p| [ p.name, p.id ] }) %>
+              </div>
+            </div>           
           </div>
+        </div>    
+      </div>
+    </div>
+  </div>
+  <div class="accordion-group">
+    <div class="accordion-heading">
+      <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseTwo">
+        Адрес
+      </a>
+    </div>
+    <div id="collapseTwo" class="accordion-body collapse">
+      <div class="accordion-inner">
+        <div class="row-fluid">
+          <%= f.fields_for :address do |addr| %>
+            <div class="span6">
+              <div class="control-group">
+                <h4>Страна</h4>
+                <div class="controls">
+                  <%=addr.select(:country_id, Country.all.collect {|p| [ p.name, p.id ] }, :include_blank => "---Страна---") %>
+                </div>
+              </div>
+              <div class="control-group">
+                <h4>Область</h4>
+                <div class="controls">
+                  <%=addr.select(:region_id, Region.all.collect {|p| [ p.name, p.id ] }, :include_blank => "---Область---") %>
+                </div>
+              </div>
+              <div class="control-group">
+                <h4>Город</h4>
+                <div class="controls">
+                  <%=addr.select(:city_id, City.all.collect {|p| [ p.name, p.id ] }, :include_blank => "---Город---") %>
+                </div>
+              </div>
+              <div class="control-group">
+                <h4>Населенный пункт</h4>
+                <div class="controls">
+                  <%=addr.select(:settlement_id, Settlement.all.collect {|p| [ p.name, p.id ] }, :include_blank => "---Населенный пункт---") %>
+                </div>
+              </div>
+            </div>
+            <div class="span6">
+              <div class="control-group">
+                <h4>Район</h4>
+                <div class="controls">
+                  <%=addr.select(:district_id, District.all.collect {|p| [ p.name, p.id ] }, :include_blank => "---Район---") %>
+                </div>
+              </div>
+              <div class="control-group">
+                <h4>Улица</h4>
+                <div class="controls">
+                  <%=addr.select(:street_id, Street.all.collect {|p| [ p.name, p.id ] }, :include_blank => "---Улица---") %>
+                </div>
+              </div>
+              <div class="control-group">
+                <h4>Дом №</h4>
+                <div class="controls">
+                  <%= addr.text_field :house, :placeholder => "Номер дома", :class => 'text_field' %>
+                </div>
+              </div>
+              <div class="control-group">
+                <h4>Квартира №</h4>
+                <div class="controls">
+                  <%= addr.text_field :flat, :placeholder => "Номер квартиры", :class => 'text_field' %>
+                </div>
+              </div>      
+          <% end %>
+            <div class="control-group">
+              <h4>№ телефона</h4>
+              <div class="controls">
+                <%= f.text_field :phone, :placeholder => "Номер телефона", :class => 'text_field' %>
+              </div>
+            </div>
+          </div>   
         </div>
       </div>
-      <div class="span6">
-        <div class="control-group">
-          <h4>Дата рождения*</h4>
-          <div class="controls">
-            <%= content_tag :div, :id => 'dp3', 'data-date-format' => 'dd-mm-yyyy', 'data-date' => :birthdate.to_s, :class => 'input-append date' do -%>
-              <%= f.text_field :birthdate.to_s, :class => 'span6' %>
-              <span class="add-on"><i class="icon-th"></i></span>
-            <%- end %>
-            <!--%= f.text_field :birthdate.to_s, :id => 'dp2', :class => 'span6'  %-->
-          </div>
-        </div>
-        <div class="control-group">
-          <h4>Пол*</h4>
-          <div class="controls">
-            <label class="radio">
-              <%= f.radio_button :sex, true %>
-                          мужской
-            </label>
-            <label class="radio">
-              <%= f.radio_button :sex, false %>
-                          женский
-            </label>  
-          </div>        
-        </div>
-        <div class="control-group">
-          <h4>Возрастная группа</h4>
-          <div class="controls">
-            <%=f.select(:age_group_id, AgeGroup.all.collect {|p| [ (p.from.to_s + '...' + p.to.to_s), p.id ] }) %>
-          </div>
-        </div>
-        <div class="control-group">
-          <h4>Группа крови</h4>
-          <div class="controls">
-            <%=f.select(:blood_group_id, BloodGroup.all.collect {|p| [ p.name, p.id ] }) %>
-          </div>
-        </div>           
+    </div>
+  </div>
+  <div class="accordion-group">
+    <div class="accordion-heading">
+      <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseThree">
+        Страховой полис
+      </a>
+    </div>
+    <div id="collapseThree" class="accordion-body collapse">
+      <div class="accordion-inner">
+        <div class="row-fluid">
+           <%= f.fields_for :policy do |pol| %>
+             <div class="span6">
+               <div class="control-group">
+                 <h4>№ полиса</h4>
+                 <div class="controls">
+                   <%= pol.text_field :number, :placeholder => "Номер полиса", :class => 'text_field' %>
+                 </div>
+               </div>
+               <div class="control-group">
+                 <h4>Страховая компания</h4>
+                 <div class="controls">
+                   <%=pol.select(:insurance_company_id, InsuranceCompany.all.collect {|p| [ p.name, p.id ] }, :include_blank => "---Компания---") %>
+                 </div>
+               </div>
+             </div>
+             <div class="span6">
+               <div class="control-group">
+                 <h4>Тип страхования</h4>
+                 <div class="controls">
+                   <%=pol.select(:insurance_type_id, InsuranceType.all.collect {|p| [ p.name, p.id ] }, :include_blank => "---Тип страхования---") %>
+                 </div>
+               </div>   
+             </div>
+           <% end %>
+        </div>    
       </div>
     </div>
   </div>
-  
-  <div class="group_box round" >
-    <div align="center" class="label_box">
-      <h3>Адрес</h3>
-    </div>
-    <div class="row-fluid">
-      <%= f.fields_for :address do |addr| %>
-        <div class="span6">
-          <div class="control-group">
-            <h4>Страна</h4>
-            <div class="controls">
-              <%=addr.select(:country_id, Country.all.collect {|p| [ p.name, p.id ] }, :include_blank => "---Страна---") %>
-            </div>
-          </div>
-          <div class="control-group">
-            <h4>Область</h4>
-            <div class="controls">
-              <%=addr.select(:region_id, Region.all.collect {|p| [ p.name, p.id ] }, :include_blank => "---Область---") %>
-            </div>
-          </div>
-          <div class="control-group">
-            <h4>Город</h4>
-            <div class="controls">
-              <%=addr.select(:city_id, City.all.collect {|p| [ p.name, p.id ] }, :include_blank => "---Город---") %>
-            </div>
-          </div>
-          <div class="control-group">
-            <h4>Населенный пункт</h4>
-            <div class="controls">
-              <%=addr.select(:settlement_id, Settlement.all.collect {|p| [ p.name, p.id ] }, :include_blank => "---Населенный пункт---") %>
-            </div>
-          </div>
-        </div>
-        <div class="span6">
-          <div class="control-group">
-            <h4>Район</h4>
-            <div class="controls">
-              <%=addr.select(:district_id, District.all.collect {|p| [ p.name, p.id ] }, :include_blank => "---Район---") %>
-            </div>
-          </div>
-          <div class="control-group">
-            <h4>Улица</h4>
-            <div class="controls">
-              <%=addr.select(:street_id, Street.all.collect {|p| [ p.name, p.id ] }, :include_blank => "---Улица---") %>
-            </div>
-          </div>
-          <div class="control-group">
-            <h4>Дом №</h4>
-            <div class="controls">
-              <%= addr.text_field :house, :placeholder => "Номер дома", :class => 'text_field' %>
-            </div>
-          </div>
-          <div class="control-group">
-            <h4>Квартира №</h4>
-            <div class="controls">
-              <%= addr.text_field :flat, :placeholder => "Номер квартиры", :class => 'text_field' %>
-            </div>
-          </div>      
-      <% end %>
-        <div class="control-group">
-          <h4>№ телефона</h4>
-          <div class="controls">
-            <%= f.text_field :phone, :placeholder => "Номер телефона", :class => 'text_field' %>
-          </div>
-        </div>
-      </div>   
-    </div>
-  </div>
-  <div class="group_box round" >
-    <div align="center" class="label_box">
-      <h3>Страховой полис</h3>
-    </div>
-    <div class="row-fluid">
-       <%= f.fields_for :policy do |pol| %>
-         <div class="span6">
-           <div class="control-group">
-             <h4>№ полиса</h4>
-             <div class="controls">
-               <%= pol.text_field :number, :placeholder => "Номер полиса", :class => 'text_field' %>
-             </div>
-           </div>
-           <div class="control-group">
-             <h4>Страховая компания</h4>
-             <div class="controls">
-               <%=pol.select(:insurance_company_id, InsuranceCompany.all.collect {|p| [ p.name, p.id ] }, :include_blank => "---Компания---") %>
-             </div>
-           </div>
-         </div>
-         <div class="span6">
-           <div class="control-group">
-             <h4>Тип страхования</h4>
-             <div class="controls">
-               <%=pol.select(:insurance_type_id, InsuranceType.all.collect {|p| [ p.name, p.id ] }, :include_blank => "---Тип страхования---") %>
-             </div>
-           </div>   
-         </div>
-       <% end %>
-    </div>
-  </div>
-  <div class="form-actions form-horizontal">
-    <%= f.submit "Сохранить", :class => 'btn btn-primary awhite' %>
-    <%= link_to "Отмена",
-                pacients_path, :class => 'btn' %>
-  </div>
+</div>
+<div class="form-actions form-horizontal">
+  <%= f.submit "Сохранить", :class => 'btn btn-primary awhite' %>
+  <%= link_to "Отмена",
+              pacients_path, :class => 'btn' %>
+</div>
 <% end %>

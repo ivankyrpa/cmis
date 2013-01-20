@@ -14,10 +14,25 @@ class PagesController < ApplicationController
   
   def welcome
     @title = "Добро пожаловать"
+    if lymph? || phleb?
+      redirect_to pacients_url
+    else
+      if admin?
+        redirect_to current_user
+      else
+      end
+    end
+    
   end
   
   def dictionaries
     @title = "Справочники"
+  end
+  
+  def interview
+  end
+  
+  def interviews
   end
   
   private 
