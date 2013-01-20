@@ -12,30 +12,35 @@
           <h5>Характеристик нет...</h5>
         </div>
     <% else %>
-        <table class="table table-striped">
+        <table class="table table-bordered">
           <thead>
             <tr>
               <th>Характеристика</th>
-              <th>Нижняя граница</th>
-              <th>Верхняя граница</th>
-              <th>Действия</th>
+              <th>От</th>
+              <th>До</th>
+              <th></th>
             </tr>
           </thead>
           <tbody>
             <% group.characteristics.each do |characteristic| %>
               <tr>
                 <td><%= characteristic.name %></td>
-                <td><%= characteristic.first_value %></td>
-                <td><%= characteristic.second_value %></td>
-                <td>
-                  <%= link_to "Изменить",
-                              edit_characteristic_path(characteristic), :class => 'btn btn-mini' %>
-                  <%= link_to "Удалить",
-                              characteristic_path(characteristic),
-                              :method => :delete,
+                <td width="70"><%= characteristic.first_value %></td>
+                <td width="70"><%= characteristic.second_value %></td>
+                <td width="35" text-align="center">
+                  <%= link_to edit_characteristic_path(characteristic), :rel => "tooltip",
+                  'data-placement' => "top", 'data-original-title' => "Изменить", :class => "ablack" do -%>
+                    <i class="icon-pencil"></i>
+                  <%- end %>
+                  <%= link_to characteristic_path(characteristic),
+                              {:method => :delete,
                               :data => { :confirm => "Вы уверены?",
-                                         :title => "Подтверждение удаления"  },
-                              :class => 'btn btn-mini btn-danger awhite' %>
+                                         :title => "Подтверждение удаления"}, :class => "ared" }, 
+                              {:rel => "tooltip",
+                              'data-placement' => "top", 
+                              'data-original-title' => "Удалить"} do -%>
+                    <i class="icon-remove"></i>
+                  <%- end %>
                 </td>
               </tr>
             <% end %>
@@ -44,6 +49,9 @@
       <% end %>
 <% end %>
 
-<%= link_to "Добавить",
-            new_characteristic_path,
-            :class => 'btn btn-primary awhite' %>
+<div class="form-actions">
+  <%= link_to new_characteristic_path,
+              :class => 'btn btn-primary awhite' do %>
+    <i class="icon-plus"></i> Добавить
+  <% end %>
+</div>  

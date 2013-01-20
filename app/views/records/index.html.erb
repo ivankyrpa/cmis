@@ -23,7 +23,7 @@
 <div class="form-actions">
   <%= link_to new_pacient_record_path(@pacient),
               :class => 'btn btn-primary awhite' do %>
-    <i class='icon-plus'></i> Новая история
+    <i class='icon-plus'></i> Новая запись
   <% end %>
   <% if @pacient.records.length != 0 %>
     <%= link_to_submit "Удалить выбранное" %>

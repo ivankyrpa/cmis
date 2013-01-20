@@ -73,9 +73,11 @@ class InterviewsController < ApplicationController
 
     respond_to do |format|
       if @interview.save
-        format.html { redirect_to @interview, notice: 'Interview was successfully created.' }
+        flash[:success] = "Опросной лист успешно добавлен."
+        format.html { redirect_to @interview }
         format.json { render json: @interview, status: :created, location: @interview }
       else
+        flash.now[:error] = "Введены неверные данные!"
         format.html { render action: "new" }
         format.json { render json: @interview.errors, status: :unprocessable_entity }
       end
@@ -89,9 +91,11 @@ class InterviewsController < ApplicationController
 
     respond_to do |format|
       if @interview.update_attributes(params[:interview])
-        format.html { redirect_to @interview, notice: 'Interview was successfully updated.' }
+        flash[:success] = "Опросной лист успешно отредактирован."
+        format.html { redirect_to @interview }
         format.json { head :no_content }
       else
+        flash.now[:error] = "Введены неверные данные!"
         format.html { render action: "edit" }
         format.json { render json: @interview.errors, status: :unprocessable_entity }
       end
@@ -105,6 +109,7 @@ class InterviewsController < ApplicationController
     @interview.destroy
 
     respond_to do |format|
+      flash[:success] = "Опросной лист успешно удален."
       format.html { redirect_to interviews_url }
       format.json { head :no_content }
     end

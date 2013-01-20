@@ -11,36 +11,36 @@
     <table class="table table-striped">
       <tr>
         <td><p><strong>Текст в случае оперативного лечения</strong></p></td>
-        <td><%= group.l_recommendations.first.content_o %></td>
+        <td width="240"><%= group.l_recommendations.first.content_o %></td>
       </tr>
       <tr>
         <td><p><strong>Текст в случае консервативного лечения</strong></p></td>
-        <td><%= group.l_recommendations.first.content_c %></td>
+        <td width="240"><%= group.l_recommendations.first.content_c %></td>
       </tr>
       <tr>
         <td><p><strong>Текст в случае дообследования</strong></p></td>
-        <td><%= group.l_recommendations.first.content_d %></td>
+        <td width="240"><%= group.l_recommendations.first.content_d %></td>
       </tr>
       <tr>
         <td><p><strong>Диапазон оперативных показателей, ведущих к дообследованию</strong></p></td>
-        <td><%= "#{group.l_recommendations.first.low}% -  #{group.l_recommendations.first.high}%" %></td>
+        <td width="240"><%= "#{group.l_recommendations.first.low}% -  #{group.l_recommendations.first.high}%" %></td>
       </tr>
       <tr>
         <td><p><strong>Миниммальное количество параметров</strong></p></td>
-        <td><%= "#{group.l_recommendations.first.min}%" %></td>
+        <td width="240"><%= "#{group.l_recommendations.first.min}%" %></td>
       </tr>
       <tr>
         <td></td>
         <td align="center">
           <%= link_to "Изменить",
               edit_l_recommendation_path(group.l_recommendations.first),
-              :class => 'btn' %>
+              :class => 'btn btn-mini' %>
           <%= link_to "Удалить",
               l_recommendation_path(group.l_recommendations.first),
               :method => 'delete',
               :data => { :confirm => "Вы уверены?",
                                   :title => "Подтверждение удаления"  },
-              :class => 'btn btn-danger awhite' %>
+              :class => 'btn btn-mini btn-danger awhite' %>
         </td>
       </tr>
     </table>  
@@ -50,7 +50,10 @@
 <% end %>
 
 <% if @l_recommendations.length < @groups.length  %>
-  <%= link_to "Добавить рекомендацию",
-              new_l_recommendation_path,
-              :class => 'btn btn-primary awhite' %>
+  <div class="form-actions">
+    <%= link_to new_l_recommendation_path,
+                :class => 'btn btn-primary awhite' do %>
+      <i class="icon-plus"></i> Добавить
+    <% end %>
+  </div> 
 <% end %>
